@@ -1,0 +1,39 @@
+{
+  "name": "client",
+  "plural": "clients",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "nit": {
+      "type": "string",
+      "default": "Sin nit!"
+    },
+    "phone": {
+      "type": "string",
+      "default": "Sin número!"
+    },
+    "nameContact": {
+      "type": "string",
+      "default": "Sin contácto!"
+    },
+    "address": {
+      "type": "string",
+      "default": "Sin dirección!"
+    },
+    "information": {
+      "type": "string",
+      "default": "Sin información extra!"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

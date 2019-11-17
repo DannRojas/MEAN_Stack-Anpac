@@ -1,0 +1,13 @@
+{
+  "db": {
+    "host": "",
+    "port": 27017,
+    "url": "",
+    "database": "anpacDB",
+    "password": "",
+    "name": "db",
+    "user": "",
+    "useNewUrlParser": true,
+    "connector": "mongodb"
+  }
+}

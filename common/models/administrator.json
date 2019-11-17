@@ -1,0 +1,27 @@
+{
+  "name": "administrator",
+  "plural": "administrators",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "default": "Sin número!"
+    },
+    "address": {
+      "type": "string",
+      "default": "Sin dirección!"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

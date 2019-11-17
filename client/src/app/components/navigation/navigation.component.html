@@ -1,0 +1,142 @@
+<!--Double navigation-->
+<header>
+  <!-- Sidebar navigation -->
+  <mdb-side-nav #sidenav class="sn-bg-4 fixed" [fixed]="true">
+
+    <mdb-navbar-brand>
+      <li>
+        <div class="logo-wrapper waves-light">
+          <a href="#"><img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" class="img-fluid flex-center"></a>
+        </div>
+      </li>
+    </mdb-navbar-brand>
+
+    <links>
+      <li>
+        <ul class="social">
+          <li><a class="icons-sm fb-ic">
+              <mdb-icon fab icon="facebook-f"> </mdb-icon>
+            </a></li>
+          <li><a class="icons-sm pin-ic">
+              <mdb-icon fab icon="pinterest"> </mdb-icon>
+            </a></li>
+          <li><a class="icons-sm gplus-ic">
+              <mdb-icon fab icon="google-plus"> </mdb-icon>
+            </a></li>
+          <li><a class="icons-sm tw-ic">
+              <mdb-icon fab icon="twitter"> </mdb-icon>
+            </a></li>
+        </ul>
+      </li>
+      <li>
+        <form class="search-form" role="search">
+          <div class="form-group md-form mt-0 pt-1 waves-light" mdbWavesEffect>
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+        </form>
+      </li>
+      <li>
+        <ul class="collapsible collapsible-accordion">
+          <mdb-accordion [multiple]="false" aria-multiselectable="false">
+            <mdb-accordion-item>
+              <mdb-accordion-item-head mdbWavesEffect>
+                <mdb-icon fas icon="chevron-right"></mdb-icon> <b>Collapsible menu</b>
+              </mdb-accordion-item-head>
+              <mdb-accordion-item-body>
+                <ul>
+                  <li><a href="#" mdbWavesEffect><b>Link 1</b></a></li>
+                  <li><a href="#" mdbWavesEffect><b>Link 2</b></a></li>
+                </ul>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+            <mdb-accordion-item class="no-collase">
+              <mdb-accordion-item-head mdbWavesEffect>
+                <mdb-icon far icon="hand-pointer"></mdb-icon> Simple link
+              </mdb-accordion-item-head>
+              <mdb-accordion-item-body></mdb-accordion-item-body>
+            </mdb-accordion-item>
+            <mdb-accordion-item>
+              <mdb-accordion-item-head mdbWavesEffect>
+                <mdb-icon far icon="eye"></mdb-icon> Collapsible menu 2
+              </mdb-accordion-item-head>
+              <mdb-accordion-item-body>
+                <ul>
+                  <li><a href="#" mdbWavesEffect>Link 1</a></li>
+                  <li><a href="#" mdbWavesEffect>Link 2</a></li>
+                </ul>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+            <mdb-accordion-item class="no-collase">
+              <mdb-accordion-item-head mdbWavesEffect>
+                <mdb-icon far icon="gem"></mdb-icon> Simple link 2
+              </mdb-accordion-item-head>
+              <mdb-accordion-item-body></mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+          </mdb-accordion>
+        </ul>
+      </li>
+    </links>
+    <div class="sidenav-bg mask-strong"></div>
+  </mdb-side-nav>
+  <!--/. Sidebar navigation -->
+
+  <!-- Navbar -->
+  <mdb-navbar SideClass="navbar navbar-expand-lg scrolling-navbar navbar-light white ie-nav fixed-top"
+    [containerInside]="true">
+    <mdb-navbar-brand class="d-flex align-items-center">
+      <mdb-icon *ngIf="isLogin" (click)="sidenav.show()" fas icon="bars" class="blue-text mr-2" size="lg"></mdb-icon>
+      <a class="navbar-brand font-weight-bold" routerLink="/">
+        <strong><b>ANPAC</b></strong>
+      </a>
+    </mdb-navbar-brand>
+    <links>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item waves-light" routerLinkActive="active">
+          <a class="nav-link" mdbWavesEffect routerLink="/favorites">
+            <mdb-icon class="blue-text" fas icon="heart" size="lg"></mdb-icon> <span
+              class="font-weight-bold">Favoritos</span>
+          </a>
+        </li>
+        <li class="nav-item waves-light" routerLinkActive="active">
+          <a class="nav-link" mdbWavesEffect routerLink="/car-shop">
+            <mdb-icon class="blue-text" fas icon="shopping-cart" size="lg"></mdb-icon> <span
+              class="font-weight-bold">Carrito</span>
+          </a>
+        </li>
+        <li class="nav-item waves-light" routerLinkActive="active">
+          <a class="nav-link" mdbWavesEffect routerLink="/contact">
+            <mdb-icon class="blue-text" fas icon="envelope" size="lg"></mdb-icon> <span
+              class="font-weight-bold">Contacto</span>
+          </a>
+        </li>
+        <li class="nav-item waves-light" routerLinkActive="active">
+          <a class="nav-link" mdbWavesEffect routerLink="/about">
+            <mdb-icon class="blue-text" far icon="inbox" size="lg"></mdb-icon> <span class="font-weight-bold">Quienes
+              Somos</span>
+          </a>
+        </li>
+        <li class="nav-item waves-light" routerLinkActive="active" *ngIf="!isLogin">
+          <a class="nav-link" mdbWavesEffect (click)="onLogin()">
+            <mdb-icon class="blue-text" fas icon="user" size="lg"></mdb-icon> <span class="font-weight-bold">Iniciar
+              Sesión</span>
+          </a>
+        </li>
+        <li class="nav-item dropdown btn-group waves-light" dropdown routerLinkActive="active" *ngIf="isLogin">
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect><img
+              src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt=""
+              class="img-fluid rounded-circle z-depth-0"> <span class="font-weight-bold"> Nombre de Usuario</span></a>
+          <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item waves-light" routerLink="/user/profile" mdbWavesEffect>Perfil</a>
+            <div class="divider dropdown-divider"></div>
+            <a class="dropdown-item waves-light" mdbWavesEffect (click)="onLogout()">Cerrar Sesión</a>
+          </div>
+        </li>
+      </ul>
+    </links>
+  </mdb-navbar>
+</header>
+<!--/.Double navigation-->
+
+<!-- Modal Login -->
+<app-login></app-login>

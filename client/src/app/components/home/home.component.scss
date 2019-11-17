@@ -1,0 +1,32 @@
+img {
+    position: relative;
+    height: 15rem;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+// .section {
+
+  // }
+  .mdb-scrollspy {
+    display: block;
+    position: fixed;
+    top: 0 !important;
+    right: 0;
+    li {
+      display: block;
+      padding: 1rem 1rem;
+      &:first-child {
+        padding-top: 0.5rem;
+    }
+      &:last-child {
+       padding-bottom: 0.5rem;
+      }
+    a {
+      &.active {
+        font-weight: bold;
+        }
+      }
+    }
+  }

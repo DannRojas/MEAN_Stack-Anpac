@@ -1,0 +1,75 @@
+<!-- Modal Login -->
+<div mdbModal #login="mdbModal" class="modal fade top" id="login" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header light-blue darken-3 white-text">
+        <h4 class="title">
+          <mdb-icon fas icon="users"></mdb-icon> Iniciar Sesión
+        </h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="login.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body mb-0 text-center">
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+          <div class="md-form">
+            <input mdbInput mdbValidate type="text" id="userName" class="form-control" formControlName="userName">
+            <label for="userName">Usuario</label>
+            <div class="alerts" *ngIf="userName.invalid && (userName.dirty || userName.touched)">
+              <mdb-error *ngIf="!!userName.errors.required">El nombre de usuario es requerido </mdb-error>
+              <mdb-error *ngIf="!!userName.errors.minlength">El nombre de usuario debe tener almenos 5 caracteres
+              </mdb-error>
+            </div>
+            <mdb-success *ngIf="userName.valid && (userName.dirty || userName.touched)">Nombre de usuario válido
+            </mdb-success>
+          </div>
+          <div class="md-form">
+            <input mdbInput mdbValidate [type]="hidePassword ? 'password' : 'text'" id="userPassword"
+              class="form-control" formControlName="userPassword">
+            <label for="form3">Contraseña</label>
+            <div class="alerts" *ngIf="userPassword.invalid && (userPassword.dirty || userPassword.touched)">
+              <mdb-error *ngIf="!!userPassword.errors.required">La contraseña es requerida </mdb-error>
+              <mdb-error *ngIf="!!userPassword.errors.minlength">La contraseña debe tener almenos 8 caracteres
+              </mdb-error>
+            </div>
+            <mdb-success *ngIf="userPassword.valid && (userPassword.dirty || userPassword.touched)">Contraseña válida
+            </mdb-success>
+            <mdb-icon fas [icon]="hidePassword ? 'eye-slash' : 'eye'" (click)="togglePassword()"
+              class="float-right pr-4"></mdb-icon>
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="isError">
+            Usuario o contraseña incorrectos
+          </div>
+          <div class="text-center form-sm mt-2">
+            <button mdbBtn color="info" type="submit" class="waves-light" mdbWavesEffect
+              [disabled]="loginForm.valid ? false : true">
+              Iniciar Sesión
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <div class="options text-right mr-5">
+          <p class="pt-1">
+            Aún no tiene una cuenta?
+            <a routerLink="/contact" (click)="login.hide()" class="blue-text">Clic Aqui</a>
+          </p>
+        </div>
+        <button type="button" mdbBtn color="info" outline="true" class="ml-auto" data-dismiss="modal"
+          (click)="login.hide()" mdbWavesEffect>
+          Cerrar
+        </button>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+
+<button #btnOpen (click)="login.show()" hidden>
+  abrir
+</button>
