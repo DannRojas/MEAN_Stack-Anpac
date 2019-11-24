@@ -1,4 +1,5 @@
-<section class="section" id="section">
+<!-- <div class="container"> -->
+<section class="section mb-4" id="section">
   <!-- Grid column -->
   <div class="col-12">
     <!-- Image -->
@@ -11,7 +12,7 @@
             <h1 class="card-title font-weight-bold pt-2">
               <strong>ANPAC</strong>
             </h1>
-            <p class="font-weight-bold">Empresa importadora y distribuidora de aceites y aditivos industriales </p>
+            <p class="font-weight-bold mx-1">Empresa importadora y distribuidora de aceites y aditivos industriales </p>
           </div>
         </div>
       </div>
@@ -20,121 +21,82 @@
   </div>
   <!-- Grid column -->
 </section>
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12 mx-auto">
-      <section mdbScrollSpyWindow="scrollspy5" id="section1" class="section">
-
-        <mdb-carousel [animation]="'slide'" [ngSwitch]="carouselDisplayMode" [isControls]="true"
-          class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'">
-          <ng-container *ngSwitchCase="'single'">
-            <mdb-carousel-item *ngFor="let card of cards">
-              <mdb-card class="my-1">
-                <mdb-card-img [src]="card.img" alt="Card image cap"></mdb-card-img>
-                <mdb-card-body>
-                  <mdb-card-title>
-                    <h4> {{ card.title }}</h4>
-                  </mdb-card-title>
-                  <p>{{ card.description }}</p>
-                  <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>{{card.buttonText}}</a>
-                </mdb-card-body>
-              </mdb-card>
-            </mdb-carousel-item>
-          </ng-container>
-
-          <ng-container *ngSwitchCase="'multiple'">
-            <mdb-carousel-item *ngFor="let item of slides; let i = index">
-              <div class="col-md-4" *ngFor="let card of item; let cardIndex = index">
-                <mdb-card class="my-1">
-                  <mdb-card-img [src]="card.img" alt="Card image cap"></mdb-card-img>
-                  <mdb-card-body>
-                    <mdb-card-title>
-                      <h4>{{card.title}}</h4>
-                    </mdb-card-title>
-                    <p>{{card.description}}</p>
-                    <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>{{card.buttonText}}</a>
-                  </mdb-card-body>
-                </mdb-card>
-              </div>
-            </mdb-carousel-item>
-          </ng-container>
-        </mdb-carousel>
-      </section>
-      <!-- ************************************************************************************* -->
-      <section mdbScrollSpyWindow="scrollspy5" id="section2" class="section">
-        <!--Grid column-->
-        <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
-          <!--Card-->
-          <mdb-card cascade="true" wider="true" class="card-ecommerce">
-            <!--Card image-->
-            <div class="view zoom view-cascade overlay waves-light" mdbWavesEffect>
-              <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/img (55).jpg"
-                alt="sample photo"></mdb-card-img>
-              <a>
-                <div class="mask rgba-white-slight"></div>
-              </a>
-            </div>
-            <!--Card image-->
-            <!--Card content-->
-            <mdb-card-body cascade="true" class="text-center no-padding">
-              <!--Category & Title-->
-              <a href="" class="text-muted">
-                <h5>Camera</h5>
-              </a>
-              <mdb-card-title>
-                <h4 class="card-title">
-                  <strong>
-                    <a href="">GoPro</a>
-                  </strong>
-                </h4>
-              </mdb-card-title>
-              <!--Description-->
-              <mdb-card-text>Lorem ipsum dolor sit amet, consectetur adipisicing minima veniam elit.</mdb-card-text>
-              <!--Card footer-->
-              <mdb-card-footer>
-                <span class="float-left font-weight-bold">
-                  <strong>1439$</strong>
-                </span>
-                <span class="float-right">
-                  <a class="" data-toggle="tooltip" data-placement="top" title="Quick Look">
-                    <mdb-icon far icon="eye" class="grey-text ml-3"></mdb-icon>
-                  </a>
-                  <a class="" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
-                    <mdb-icon fas icon="heart" class="grey-text ml-3"></mdb-icon>
-                  </a>
-                </span>
-              </mdb-card-footer>
-            </mdb-card-body>
-            <!--Card content-->
-          </mdb-card>
-          <!--Card-->
+<!-- ********************************************************************************************* -->
+<h2 class="text-center font-weight-bold mb-3"><b>Productos</b></h2>
+<!-- ************************************************************************************* -->
+<section mdbScrollSpyWindow="scrollspy5" id="section1" class="section container-fluid">
+  <div class="row justify-content-center">
+    <!--Grid column-->
+    <div class="col-lg-4 col-md-4 col-sm-6 mb-3" *ngFor="let product of products">
+      <!--Card-->
+      <mdb-card cascade="true" wider="true" class="card-ecommerce">
+        <!--Card image-->
+        <div class="view zoom view-cascade overlay waves-light" mdbWavesEffect>
+          <!-- <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Products/img (55).jpg" alt="sample photo"></mdb-card-img> -->
+          <mdb-card-img src="{{product.imagePath}}" alt="sample photo"></mdb-card-img>
+          <a>
+            <div class="mask rgba-white-slight"></div>
+          </a>
         </div>
-        <!--Grid column-->
-      </section>
-      <section mdbScrollSpyWindow="scrollspy5" id="section3" class="section stylish-color">
-
-      </section>
-      <section mdbScrollSpyWindow="scrollspy5" id="section4" class="section secondary-color">
-
-      </section>
-      <section mdbScrollSpyWindow="scrollspy5" id="section5" class="section deep-purple">
-
-      </section>
-      <section mdbScrollSpyWindow="scrollspy5" id="section6" class="section success-color">
-
-      </section>
+        <!--Card image-->
+        <!--Card content-->
+        <mdb-card-body cascade="true" class="text-center no-padding">
+          <!--Category & Title-->
+          <a href="" class="text-muted">
+            <h5>{{product.category}}</h5>
+          </a>
+          <mdb-card-title>
+            <h4 class="card-title">
+              <strong>
+                <a href="">{{product.name}}</a>
+              </strong>
+            </h4>
+          </mdb-card-title>
+          <!--Description-->
+          <mdb-card-text>{{product.description}}</mdb-card-text>
+          <!--Card footer-->
+          <mdb-card-footer>
+            <span class="float-left font-weight-bold">
+              <strong>{{product.price}}$</strong>
+            </span>
+            <span class="float-right">
+              <a class="" data-toggle="tooltip" data-placement="top" title="Quick Look">
+                <mdb-icon far icon="eye" class="grey-text ml-3"></mdb-icon>
+              </a>
+              <a class="" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
+                <mdb-icon fas icon="heart" class="grey-text ml-3"></mdb-icon>
+              </a>
+            </span>
+          </mdb-card-footer>
+        </mdb-card-body>
+        <!--Card content-->
+      </mdb-card>
+      <!--Card-->
     </div>
-    <div class="col-md-2 d-none d-md-block">
-      <div class="mdb-scrollspy mt-5">
-        <ul mdbScrollSpy="scrollspy5" class="nav d-flex flex-column p-3">
-          <li class="nav-item py-1"><a mdbScrollSpyLink="section1" class="nav-link" href="#section1">Section 1</a></li>
-          <li class="nav-item py-1"><a mdbScrollSpyLink="section2" class="nav-link" href="#section2">Section 2</a></li>
-          <li class="nav-item py-1"><a mdbScrollSpyLink="section3" class="nav-link" href="#section3">Section 3</a></li>
-          <li class="nav-item py-1"><a mdbScrollSpyLink="section4" class="nav-link" href="#section4">Section 4</a></li>
-          <li class="nav-item py-1"><a mdbScrollSpyLink="section5" class="nav-link" href="#section5">Section 5</a></li>
-          <li class="nav-item py-1"><a mdbScrollSpyLink="section6" class="nav-link" href="#section6">Section 6</a></li>
-        </ul>
-      </div>
-    </div>
+    <!--Grid column-->
   </div>
-</div>
+</section>
+<section mdbScrollSpyWindow="scrollspy5" id="section3" class="section stylish-color">
+
+</section>
+<section mdbScrollSpyWindow="scrollspy5" id="section4" class="section secondary-color">
+
+</section>
+<section mdbScrollSpyWindow="scrollspy5" id="section5" class="section deep-purple">
+
+</section>
+<section mdbScrollSpyWindow="scrollspy5" id="section6" class="section success-color">
+
+</section>
+<!-- <div class="col-md-2 d-none d-md-block">
+  <div class="mdb-scrollspy mt-5">
+    <ul mdbScrollSpy="scrollspy5" class="nav d-flex flex-column p-3">
+      <li class="nav-item py-1"><a mdbScrollSpyLink="section1" class="nav-link" href="#section1">Section 1</a></li>
+      <li class="nav-item py-1"><a mdbScrollSpyLink="section2" class="nav-link" href="#section2">Section 2</a></li>
+      <li class="nav-item py-1"><a mdbScrollSpyLink="section3" class="nav-link" href="#section3">Section 3</a></li>
+      <li class="nav-item py-1"><a mdbScrollSpyLink="section4" class="nav-link" href="#section4">Section 4</a></li>
+      <li class="nav-item py-1"><a mdbScrollSpyLink="section5" class="nav-link" href="#section5">Section 5</a></li>
+      <li class="nav-item py-1"><a mdbScrollSpyLink="section6" class="nav-link" href="#section6">Section 6</a></li>
+    </ul>
+  </div>
+</div> -->

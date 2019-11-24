@@ -1,5 +1,7 @@
-import { UserInterface } from './../models/user-interface';
+import { AdministratorInterface } from './../models/administrator-interface';
+import { ClientInterface } from './../models/client-interface';
 import { Injectable } from '@angular/core';
+import { UserInterface } from '../models/user-interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
@@ -16,21 +18,22 @@ export class AuthService {
     "Content-type": "application/json"
   })
 
-  registerUser(username: string, email: string, password): Observable<any>{
-    const url_api = "http:/localhost:3000/api/Users";
+  createUser(user: UserInterface): Observable<any>{
+    const url_api = "http:/localhost:3000/api/users";
     return this.http.post<UserInterface>(
       url_api,
       {
-        username: name,
-        email: email,
-        password: password
+        type: user.type,
+        username: user.username,
+        email: user.email,
+        password: user.password
       },
       { headers:this.headers }
     ).pipe(map(data => data));
   }
 
   loginUser(username: string, password: string): Observable<any>{
-    const url_api = "http://localhost:3000/api/Users/login?include=user";
+    const url_api = "http://localhost:3000/api/users/login?include=user";
     return this.http.post<UserInterface>(
       url_api,
       {
@@ -43,8 +46,8 @@ export class AuthService {
 
   logoutUser():Observable<any> {
     let accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken)
-    const url_api = `http://localhost:3000/api/Users/logout?access_token=${accessToken}`;
+    console.log(accessToken);
+    const url_api = `http://localhost:3000/api/users/logout?access_token=${accessToken}`;
     localStorage.removeItem('accessToken');
     localStorage.removeItem('currentUser');
     return this.http.post<UserInterface>(url_api, {headers: this.headers});
@@ -72,4 +75,19 @@ export class AuthService {
       return null;
     }
   }
+
+  getUserClient(): Observable<ClientInterface>{
+    let accessToken = localStorage.getItem('accessToken');
+    let user: UserInterface = this.getCurrentUser();
+    const url_api = `http:/localhost:3000/api/users/${user.id}/client?access_token=${accessToken}`;
+    return this.http.get<ClientInterface>(url_api, {headers: this.headers});
+  }
+
+  getUserAdmin(): Observable<AdministratorInterface>{
+    let accessToken = localStorage.getItem('accessToken');
+    let user: UserInterface = this.getCurrentUser();
+    const url_api = `http:/localhost:3000/api/users/${user.id}/admin?access_token=${accessToken}`;
+    return this.http.get<AdministratorInterface>(url_api, {headers: this.headers});
+  }
+
 }
