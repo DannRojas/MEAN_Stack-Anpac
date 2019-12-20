@@ -1,47 +1,48 @@
 import { ImageService } from './../../services/image.service';
 import { ProductInterface } from './../../models/product-interface';
 import { ProductService } from './../../services/product.service';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   constructor(private productService: ProductService, private imageService: ImageService) { }
 
+  private unsubscribe$ = new Subject<void>();
+
   public products: ProductInterface[];
   public imagePort: string;
-  private prod: any[];
-  private nameImages: any[];
+  private prod: ProductInterface[];
 
   ngOnInit() {
     this.getListProducts();
   }
 
-  getListProducts() {
-    this.productService.getAllProducts().subscribe(products => {
-      this.products = products;
-      for (let i in products) {
-        this.imageService.getImageByName(this.products[i].image).subscribe(image => {
-          const blob = new Blob([image.blob()], { type: 'image/jpg' });
-          const reader = new FileReader();
-          reader.addEventListener('load', () => {
-            this.products[i].imagePath = reader.result.toString();
-          }, false)
-          if (blob)
-            reader.readAsDataURL(blob);
-        })
-      }
-    },
-      err => console.log(err))
-  };
+  getListProducts(){
+    this.productService.getAllProducts().subscribe(prod => {
+      this.prod = prod;
+      // console.log(this.prod);
+      this.imageService.getAllImages(this.prod).pipe(takeUntil(this.unsubscribe$)).subscribe(products => {
+        this.products = products;
+        console.log(this.products);
+      })
+    })
+  }
 
   getImages() {
     this.imageService.getAllImages(this.products).subscribe(res => {
       console.log(res);
     })
+  }
+
+  ngOnDestroy(): void{
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

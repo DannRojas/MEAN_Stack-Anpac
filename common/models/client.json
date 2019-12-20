@@ -33,7 +33,13 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "favorites": {
+      "type": "hasMany",
+      "model": "favorite",
+      "foreignKey": ""
+    }
+  },
   "acls": [],
   "methods": {}
 }

@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Http, ResponseContentType } from '@angular/http';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -34,21 +35,30 @@ export class ImageService {
     return this.http1.get(url_api,{responseType: ResponseContentType.Blob})
   }
 
-  getAllImages(products: ProductInterface[]){
-    let images;
-    return images = new Observable(
-      (observer)=>{
-        for (let product of products) {
-          this.getImageByName(product.image).subscribe(data => {
-            observer.next(data);
-            // this.images.push(data);
-
-            console.log(observer);
-          })
-        }
-      }
-    )
+  getAllImages(products: ProductInterface[]): Observable<ProductInterface[]>{
+    for(let i in products){
+      this.getImageByName(products[i].image).subscribe(image => {
+        const blob = new Blob([image.blob()], {type: 'image/jpg'})
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          products[i].imagePath = reader.result.toString();
+        }, false)
+        if(blob)
+        reader.readAsDataURL(blob);
+      })
+    }
+    return of<ProductInterface[]>(products);
   }
+
+  // return images = new Observable(
+  //   (observer)=>{
+  //     for (let product of products) {
+  //       this.getImageByName(product.image).subscribe(data => {
+  //         observer.next(data);
+  //       })
+  //     }
+  //   }
+  // )
 
   deleteImage(name: string) {
     const token = this.authService.getToken();

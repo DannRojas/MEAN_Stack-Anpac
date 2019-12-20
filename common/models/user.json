@@ -31,6 +31,12 @@
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
       "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
     }
   ],
   "methods": {}

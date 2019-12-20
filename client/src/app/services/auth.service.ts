@@ -18,8 +18,14 @@ export class AuthService {
     "Content-type": "application/json"
   })
 
+  // headers1: HttpHeaders = new HttpHeaders({
+  //   "Content-type": "application/json",
+  //   Authorization: this.getToken()
+  // })
+
   createUser(user: UserInterface): Observable<any>{
-    const url_api = "http:/localhost:3000/api/users";
+    let accessToken = localStorage.getItem('accessToken');
+    const url_api = `http://localhost:3000/api/users?access_token=${accessToken}`;
     return this.http.post<UserInterface>(
       url_api,
       {
@@ -63,7 +69,7 @@ export class AuthService {
   }
 
   getToken():string {
-    return localStorage.getItem("accessToker");
+    return localStorage.getItem("accessToken");
   }
 
   getCurrentUser():UserInterface {
@@ -77,16 +83,16 @@ export class AuthService {
   }
 
   getUserClient(): Observable<ClientInterface>{
-    let accessToken = localStorage.getItem('accessToken');
+    let accessToken = this.getToken();
     let user: UserInterface = this.getCurrentUser();
-    const url_api = `http:/localhost:3000/api/users/${user.id}/client?access_token=${accessToken}`;
+    const url_api = `http://localhost:3000/api/users/${user.id}/client?access_token=${accessToken}`;
     return this.http.get<ClientInterface>(url_api, {headers: this.headers});
   }
 
   getUserAdmin(): Observable<AdministratorInterface>{
     let accessToken = localStorage.getItem('accessToken');
     let user: UserInterface = this.getCurrentUser();
-    const url_api = `http:/localhost:3000/api/users/${user.id}/admin?access_token=${accessToken}`;
+    const url_api = `http://localhost:3000/api/users/${user.id}/admin?access_token=${accessToken}`;
     return this.http.get<AdministratorInterface>(url_api, {headers: this.headers});
   }
 

@@ -86,7 +86,7 @@
     [containerInside]="true">
     <mdb-navbar-brand class="d-flex align-items-center">
       <mdb-icon *ngIf="isLogin" (click)="sidenav.show()" fas icon="bars" class="blue-text mr-2" size="lg"></mdb-icon>
-      <a class="navbar-brand font-weight-bold" routerLink="/">
+      <a class="navbar-brand font-weight-bold" [routerLink]="['/']">
         <strong><b>ANPAC</b></strong>
       </a>
     </mdb-navbar-brand>
@@ -111,7 +111,7 @@
           </a>
         </li>
         <li class="nav-item waves-light" routerLinkActive="active">
-          <a class="nav-link" mdbWavesEffect routerLink="/about">
+          <a class="nav-link" mdbWavesEffect [routerLink]="['about']">
             <mdb-icon class="blue-text" far icon="inbox" size="lg"></mdb-icon> <span class="font-weight-bold">Quienes
               Somos</span>
           </a>

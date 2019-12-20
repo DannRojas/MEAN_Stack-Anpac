@@ -22,8 +22,13 @@ export class FavoriteService {
   getAllFavorites(): Observable<FavoriteInterface[]>{
     const token = this.authService.getToken();
     const url_api = `http://localhost:3000/api/favorites?access_token=${token}`;
-    //return this.http.get<FavoriteInterface[]>(url_api); 
     return this.http.get<FavoriteInterface[]>(url_api,{ headers: this.headers });
+  }
+
+  getFavoritesOfClient(id: string): Observable<FavoriteInterface[]>{
+    const token = this.authService.getToken();
+    const url_api = `http://localhost:3000/api/favorites?filter=[where][clientId]=${id}access_token=${token}`;
+    return this.http.get<FavoriteInterface[]>(url_api, { headers: this.headers });
   }
 
   saveFavorite(favorite: FavoriteInterface): Observable<FavoriteInterface>{
