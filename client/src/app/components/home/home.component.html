@@ -4,7 +4,7 @@
   <div class="col-12">
     <!-- Image -->
     <div class="view zoom text-center d-flex align-items-center">
-      <img src="../../../assets/img/promocional.jpg">
+      <img class="cover" src="../../../assets/img/promocional.jpg">
       <div class="mask rgba-white-strong">
         <div class="dark-grey-text pt-3">
           <div>
@@ -27,12 +27,12 @@
 <section mdbScrollSpyWindow="scrollspy5" id="section1" class="section container-fluid">
   <div class="row justify-content-center">
     <!--Grid column-->
-    <div class="col-lg-4 col-md-4 col-sm-6 mb-3" *ngFor="let product of products">
+    <div class="col-lg-3 col-md-4 responsive mb-3" *ngFor="let product of products">
       <!--Card-->
-      <mdb-card cascade="true" wider="true" class="card-ecommerce">
+      <mdb-card cascade="true" narrower="true" class="card-ecommerce">
         <!--Card image-->
-        <div class="view zoom view-cascade overlay waves-light" mdbWavesEffect>
-          <mdb-card-img src="{{product.imagePath}}" alt="sample photo"></mdb-card-img>
+        <div class="view zoom view-cascade overlay waves-light white" mdbWavesEffect>
+          <img src="{{product.imagePath}}" class="img-fluid img" alt="sample image">
           <a>
             <div class="mask rgba-white-slight"></div>
           </a>
@@ -45,16 +45,16 @@
             <h5>{{product.code}}</h5>
           </a>
           <mdb-card-title>
-            <h4 class="card-title">
+            <h5 class="card-title">
               <strong>
                 <a href="">{{product.name}}</a>
               </strong>
-            </h4>
+            </h5>
           </mdb-card-title>
           <!--Description-->
-          <mdb-card-text>{{product.description}}</mdb-card-text>
+          <!--<mdb-card-text>{{product.description}}</mdb-card-text> -->
           <!--Card footer-->
-          <mdb-card-footer>
+          <!-- <mdb-card-footer> -->
             <span class="float-left font-weight-bold">
               <strong>{{product.price}}$</strong>
             </span>
@@ -62,11 +62,11 @@
               <a class="" data-toggle="tooltip" data-placement="top" title="Quick Look">
                 <mdb-icon far icon="eye" class="grey-text ml-3"></mdb-icon>
               </a>
-              <a class="" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
+              <a class="" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
                 <mdb-icon fas icon="heart" class="grey-text ml-3"></mdb-icon>
               </a>
             </span>
-          </mdb-card-footer>
+          <!-- </mdb-card-footer> -->
         </mdb-card-body>
         <!--Card content-->
       </mdb-card>
@@ -99,3 +99,49 @@
     </ul>
   </div>
 </div> -->
+
+
+<section mdbScrollSpyWindow="scrollspy5" id="section2" class="section container-fluid">
+  <!-- Grid column -->
+  <div class="row justify-content-center">
+    <div class="col-lg-3 col-md-4 mb-4 responsive" *ngFor="let product of products">
+      
+      <div class="card ">
+        
+        <div class="view overlay zoom">
+        <img src="{{product.imagePath}}" class="img-fluid img" alt="sample image">
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+      
+      <div class="card-body">
+        
+        <h5 class="card-title mb-1">
+          <strong>
+            <a href="" class="dark-grey-text">iMac</a>
+          </strong>
+        </h5>
+        <span class="badge badge-danger mb-2">bestseller</span>
+        <!-- <mdb-card-text>{{product.description}}</mdb-card-text> -->
+
+        <div class="card-footer pb-0">
+          <div class="row mb-0">
+            <span class="float-left">
+              <strong>1439$</strong>
+            </span>
+            <span class="float-right">
+              <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                <i class="fas fa-shopping-cart ml-3"></i>
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+  </div>
+</div>
+<!-- Grid column -->
+</section>

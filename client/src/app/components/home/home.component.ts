@@ -27,10 +27,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   getListProducts(){
     this.productService.getAllProducts().subscribe(prod => {
       this.prod = prod;
-      // console.log(this.prod);
       this.imageService.getAllImages(this.prod).pipe(takeUntil(this.unsubscribe$)).subscribe(products => {
         this.products = products;
-        console.log(this.products);
       })
     })
   }

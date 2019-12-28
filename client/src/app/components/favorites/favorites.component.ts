@@ -20,7 +20,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
 
   private unsubscribe$ = new Subject<void>();
 
-  public favorites: FavoriteInterface[];
+  // public favorites: FavoriteInterface[];
   public products: ProductInterface[];
   private prod: ProductInterface[];
 

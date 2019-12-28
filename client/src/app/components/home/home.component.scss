@@ -1,32 +1,54 @@
-img {
-    position: relative;
-    height: 15rem;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
+.cover {
+  position         : relative;
+  height           : 15rem;
+  width            : 100%;
+  background-repeat: no-repeat;
+  background-size  : cover;
 }
 
-// .section {
+.img {
+  position     : relative;
+  height       : 12rem;
+  width        : auto;
+  margin-left  : auto;
+  margin-right : auto;
+  margin-top   : 10px;
+  margin-bottom: 10px;
+}
 
-  // }
-  .mdb-scrollspy {
+.white{
+  background-color: white;
+}
+
+.mdb-scrollspy {
+  display : block;
+  position: fixed;
+  top     : 0 !important;
+  right   : 0;
+
+  li {
     display: block;
-    position: fixed;
-    top: 0 !important;
-    right: 0;
-    li {
-      display: block;
-      padding: 1rem 1rem;
-      &:first-child {
-        padding-top: 0.5rem;
+    padding: 1rem 1rem;
+
+    &:first-child {
+      padding-top: 0.5rem;
     }
-      &:last-child {
-       padding-bottom: 0.5rem;
-      }
+
+    &:last-child {
+      padding-bottom: 0.5rem;
+    }
+
     a {
       &.active {
         font-weight: bold;
-        }
       }
     }
   }
+}
+
+@media screen and (max-width: 800px) {
+  .responsive{
+    width: 50%;
+    // position: relative;
+  }
+}

@@ -50,16 +50,6 @@ export class ImageService {
     return of<ProductInterface[]>(products);
   }
 
-  // return images = new Observable(
-  //   (observer)=>{
-  //     for (let product of products) {
-  //       this.getImageByName(product.image).subscribe(data => {
-  //         observer.next(data);
-  //       })
-  //     }
-  //   }
-  // )
-
   deleteImage(name: string) {
     const token = this.authService.getToken();
     const url_api = `http://localhost:3000/api/images/product-images/files/${name}`;
