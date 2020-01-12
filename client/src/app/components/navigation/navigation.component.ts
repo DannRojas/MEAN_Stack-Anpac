@@ -1,3 +1,4 @@
+import { UserInterface } from './../../models/user-interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { LoginComponent } from './../user/login/login.component';
@@ -15,18 +16,24 @@ export class NavigationComponent implements OnInit {
   loginComponent: LoginComponent;
 
   public isLogin:boolean = false;
+  public isAdmin:boolean = false;
+  public user:UserInterface;
 
   ngOnInit() {
-    this.currentUser();
+    this.getCurrentUser();
   }
 
   onLogin(){
     this.loginComponent.openModal();
   }
 
-  currentUser(){
+  getCurrentUser(){
     if(this.authService.getCurrentUser() != null){
+      this.user = this.authService.getCurrentUser();
       this.isLogin = true;
+      if(this.user.type == "admin"){
+        this.isAdmin = true;
+      }
     }
   }
 

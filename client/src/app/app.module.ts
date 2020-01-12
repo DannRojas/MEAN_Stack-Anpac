@@ -18,6 +18,9 @@ import { AboutComponent } from './components/about/about.component';
 import { Page404Component } from './components/page404/page404.component';
 import { ProductComponent } from './components/product/product.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { InventoryComponent } from './components/administration/inventory/inventory.component';
+import { ClientsComponent } from './components/administration/clients/clients.component';
 
 
 @NgModule({
@@ -32,10 +35,13 @@ import { NavigationComponent } from './components/navigation/navigation.componen
     AboutComponent,
     Page404Component,
     ProductComponent,
-    NavigationComponent
+    NavigationComponent,
+    InventoryComponent,
+    ClientsComponent
   ],
   imports: [
     BrowserModule,
+    CarouselModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,

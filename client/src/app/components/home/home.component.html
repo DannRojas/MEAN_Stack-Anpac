@@ -1,60 +1,142 @@
+<!-- Carousel Wrapper -->
+<mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [animation]="'fade'">
+  <mdb-carousel-item>
+    <div class="view w-100">
+      <img class="d-block w-100" src="../../../assets/img/portada2.jpg" height="300" alt="First slide">
+      <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+    </div>
+    <div class="carousel-caption animated fadeInDown flex-center pt-5">
+      <ul class="list-unstyled">
+        <li>
+          <h1 class="h1-responisve blue-text font-weight-bold text-border-gray"><strong>Anpac Mantenimiento Industrial</strong></h1>
+        </li>
+        <li>
+          <h5 class="h5-responisve white-text font-weight-bold text-border-gray">Exelentes productos Norteamericanos y Europeos para el mantenimiento de maquinaria industrial</h5>
+        </li>
+      </ul>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <div class="view w-100">
+      <img class="d-block w-100" src="../../../assets/img/portada1.jpg" height="300" alt="Second slide">
+      <div class="mask rgba-white-light waves-light" mdbWavesEffect></div>
+    </div>
+    <div class="carousel-caption animated fadeInDown flex-center pt-5">
+      <ul class="list-unstyled">
+        <li>
+          <p class="h2 font-weight-bold text-border-red"><strong>Representantes exclusivos para toda Bolivia de:</strong></p>
+        </li>
+        <li>
+          <img src="../../../assets/png/aervoe-logo.png" class="img-fluid z-depth-0 logo" alt="Responsive image">
+          <img src="../../../assets/png/crown-logo.png" class="img-fluid z-depth-0 logo" alt="Responsive image">
+        </li>
+      </ul>
+    </div>
+  </mdb-carousel-item>
+  <mdb-carousel-item>
+    <div class="view w-100">
+      <img class="d-block w-100" src="../../../assets/img/clientes.jpg" height="300"
+        alt="Third slide">
+      <div class="waves-light" mdbWavesEffect></div>
+    </div>
+    <div class="carousel-caption animated fadeInDown position">
+      <h3 class="font-weight-bold text-primary text-border-gray"><strong>Algunos de nuestros clientes</strong></h3>
+    </div>
+  </mdb-carousel-item>
+</mdb-carousel>
 <!-- <div class="container"> -->
-<section class="section mb-4" id="section">
-  <!-- Grid column -->
-  <div class="col-12">
-    <!-- Image -->
-    <div class="view zoom text-center d-flex align-items-center">
-      <img class="cover" src="../../../assets/img/promocional.jpg">
-      <div class="mask rgba-white-strong">
-        <div class="dark-grey-text pt-3">
-          <div>
-            <a><span class="badge badge-danger">Bienvenido</span></a>
-            <h1 class="card-title font-weight-bold pt-2">
-              <strong>ANPAC</strong>
-            </h1>
-            <p class="font-weight-bold mx-1">Empresa importadora y distribuidora de aceites y aditivos industriales </p>
+
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="true">
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
+  <links>
+    <!-- Links -->
+    <ul mdbScrollSpy="scrollspy5" class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a mdbPageScroll mdbScrollSpyLink="section2" class="nav-link" href="#section2">Productos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>Lubricantes</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" mdbWavesEffect>Limpiadores</a>
+      </li>
+      <!-- Dropdown -->
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>Otros<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Anti-Agripamiento</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Metales/Metalistería</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Sistema de Inspección</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Protectores y Pinturas</a>
+        </div>
+      </li>
+    </ul>
+    <!-- Links -->
+    <!-- Search form -->
+    <form class="form-inline waves-light" mdbWavesEffect>
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      </div>
+    </form>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+
+<div class="mrx mt-3">
+  <!-- <section class="section mb-4" id="section">
+    <div class="col-8">
+      <div class="view zoom text-center d-flex align-items-center">
+        <img class="cover" src="../../../assets/img/promocional.jpg">
+        <div class="mask rgba-white-strong">
+          <div class="dark-grey-text pt-3">
+            <div>
+              <a><span class="badge badge-danger">Bienvenido</span></a>
+              <h1 class="card-title font-weight-bold pt-2">
+                <strong>ANPAC</strong>
+              </h1>
+              <p class="font-weight-bold mx-1">Empresa importadora y distribuidora de aceites y aditivos industriales
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <!-- Image -->
-  </div>
-  <!-- Grid column -->
-</section>
-<!-- ********************************************************************************************* -->
-<h2 class="text-center font-weight-bold mb-3"><b>Productos</b></h2>
-<!-- ************************************************************************************* -->
-<section mdbScrollSpyWindow="scrollspy5" id="section1" class="section container-fluid">
-  <div class="row justify-content-center">
-    <!--Grid column-->
-    <div class="col-lg-3 col-md-4 responsive mb-3" *ngFor="let product of products">
-      <!--Card-->
-      <mdb-card cascade="true" narrower="true" class="card-ecommerce">
-        <!--Card image-->
-        <div class="view zoom view-cascade overlay waves-light white" mdbWavesEffect>
-          <img src="{{product.imagePath}}" class="img-fluid img" alt="sample image">
-          <a>
-            <div class="mask rgba-white-slight"></div>
-          </a>
-        </div>
-        <!--Card image-->
-        <!--Card content-->
-        <mdb-card-body cascade="true" class="text-center no-padding">
-          <!--Category & Title-->
-          <a href="" class="text-muted">
-            <h5>{{product.code}}</h5>
-          </a>
-          <mdb-card-title>
-            <h5 class="card-title">
-              <strong>
-                <a href="">{{product.name}}</a>
-              </strong>
-            </h5>
-          </mdb-card-title>
-          <!--Description-->
-          <!--<mdb-card-text>{{product.description}}</mdb-card-text> -->
-          <!--Card footer-->
-          <!-- <mdb-card-footer> -->
+  </section> -->
+  <!-- ********************************************************************************************* -->
+  <h2 class="text-center font-weight-bold mb-3"><b>Productos</b></h2>
+  <!-- ************************************************************************************* -->
+  <section mdbScrollSpyWindow="scrollspy5" id="section1" class="section container-fluid">
+    <div class="row justify-content-center">
+      <!--Grid column-->
+      <div class="col-lg-3 col-md-4 responsive mb-3" *ngFor="let product of products">
+        <!--Card-->
+        <mdb-card cascade="true" narrower="true" class="card-ecommerce animated fadeInUp">
+          <!--Card image-->
+          <div class="view zoom view-cascade overlay waves-light white" mdbWavesEffect>
+            <img src="{{product.imagePath}}" class="img-fluid img-card" alt="sample image">
+            <a>
+              <div class="mask rgba-white-slight"></div>
+            </a>
+          </div>
+          <!--Card image-->
+          <!--Card content-->
+          <mdb-card-body cascade="true" class="text-center no-padding">
+            <!--Category & Title-->
+            <a href="" class="text-muted">
+              <h5>{{product.code}}</h5>
+            </a>
+            <mdb-card-title>
+              <h5 class="card-title">
+                <strong>
+                  <a href="">{{product.name}}</a>
+                </strong>
+              </h5>
+            </mdb-card-title>
+
             <span class="float-left font-weight-bold">
               <strong>{{product.price}}$</strong>
             </span>
@@ -66,28 +148,29 @@
                 <mdb-icon fas icon="heart" class="grey-text ml-3"></mdb-icon>
               </a>
             </span>
-          <!-- </mdb-card-footer> -->
-        </mdb-card-body>
-        <!--Card content-->
-      </mdb-card>
-      <!--Card-->
+            <!-- </mdb-card-footer> -->
+          </mdb-card-body>
+          <!--Card content-->
+        </mdb-card>
+        <!--Card-->
+      </div>
+      <!--Grid column-->
     </div>
-    <!--Grid column-->
-  </div>
-</section>
-<section mdbScrollSpyWindow="scrollspy5" id="section3" class="section stylish-color">
+  </section>
+  <section mdbScrollSpyWindow="scrollspy5" id="section3" class="section stylish-color">
 
-</section>
-<section mdbScrollSpyWindow="scrollspy5" id="section4" class="section secondary-color">
+  </section>
+  <section mdbScrollSpyWindow="scrollspy5" id="section4" class="section secondary-color">
 
-</section>
-<section mdbScrollSpyWindow="scrollspy5" id="section5" class="section deep-purple">
+  </section>
+  <section mdbScrollSpyWindow="scrollspy5" id="section5" class="section deep-purple">
 
-</section>
-<section mdbScrollSpyWindow="scrollspy5" id="section6" class="section success-color">
+  </section>
+  <section mdbScrollSpyWindow="scrollspy5" id="section6" class="section success-color">
 
-</section>
-<!-- <div class="col-md-2 d-none d-md-block">
+  </section>
+  <!-- Slides -->
+  <!-- <div class="col-md-2 d-none d-md-block">
   <div class="mdb-scrollspy mt-5">
     <ul mdbScrollSpy="scrollspy5" class="nav d-flex flex-column p-3">
       <li class="nav-item py-1"><a mdbScrollSpyLink="section1" class="nav-link" href="#section1">Section 1</a></li>
@@ -99,49 +182,49 @@
     </ul>
   </div>
 </div> -->
+<section mdbScrollSpyWindow="scrollspy5" id="section2" class="section">
+  <div>Some tags before</div>
+  <owl-carousel-o [options]="customOptions" class="section container-fluid">
+    <div class="row justify-content-center">
+      <div class="col-lg-3 col-md-4 mb-4 responsive" *ngFor="let product of products">
+        <ng-template carouselSlide>
+          <mdb-card class="card mr-3 ml-3 mt-2 mb-2 animated pulse">
+            <div class="view overlay zoom">
+              <img src="{{product.imagePath}}" class="img-fluid img-card" alt="sample image">
+            </div>
+            <div class="card-body text-center pt-1">
+              <span class="badge badge-warning mb-2">{{product.code}}</span>
+              <mdb-card-title>
+                <h5 class="card-title">
+                  <strong>
+                    <a href="">{{product.name}}</a>
+                  </strong>
+                </h5>
+              </mdb-card-title>
 
-
-<section mdbScrollSpyWindow="scrollspy5" id="section2" class="section container-fluid">
-  <!-- Grid column -->
-  <div class="row justify-content-center">
-    <div class="col-lg-3 col-md-4 mb-4 responsive" *ngFor="let product of products">
-      
-      <div class="card ">
-        
-        <div class="view overlay zoom">
-        <img src="{{product.imagePath}}" class="img-fluid img" alt="sample image">
-        <a>
-          <div class="mask rgba-white-slight"></div>
-        </a>
+              <div class="row mx-auto">
+              <span class="mr-auto">
+                <strong>{{product.price}}Bs.</strong>
+              </span>
+              <div class="ml-auto">
+                <a class="" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
+                  <mdb-icon fas icon="heart" class="grey-text pr-1"></mdb-icon>
+                </a>
+                <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                  <mdb-icon fas icon="shopping-cart" class="grey-text"></mdb-icon>
+                </a>
+              </div>
+              </div>
+            </div>
+          </mdb-card>
+        </ng-template>
       </div>
-      
-      <div class="card-body">
-        
-        <h5 class="card-title mb-1">
-          <strong>
-            <a href="" class="dark-grey-text">iMac</a>
-          </strong>
-        </h5>
-        <span class="badge badge-danger mb-2">bestseller</span>
-        <!-- <mdb-card-text>{{product.description}}</mdb-card-text> -->
-
-        <div class="card-footer pb-0">
-          <div class="row mb-0">
-            <span class="float-left">
-              <strong>1439$</strong>
-            </span>
-            <span class="float-right">
-              <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                <i class="fas fa-shopping-cart ml-3"></i>
-              </a>
-            </span>
-          </div>
-        </div>
-      </div>
-      
     </div>
-
-  </div>
-</div>
-<!-- Grid column -->
+    <!-- <div class="owl-nav">
+    <div class="owl-prev">prev</div>
+    <div class="owl-next">next</div>
+  </div> -->
+  </owl-carousel-o>
+  <div>Some tags after</div>
 </section>
+</div>

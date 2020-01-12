@@ -52,7 +52,7 @@ export class ImageService {
 
   deleteImage(name: string) {
     const token = this.authService.getToken();
-    const url_api = `http://localhost:3000/api/images/product-images/files/${name}`;
+    const url_api = `http://localhost:3000/api/images/product-images/files/${name}?access-token=${token}`;
     return this.http.delete(url_api, { headers: this.headers }).pipe(map(data => data));
   }
 

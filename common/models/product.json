@@ -35,6 +35,10 @@
       "required": true,
       "default": 0
     },
+    "boxCapacity": {
+      "type": "number",
+      "required": true
+    },
     "units": {
       "type": "number",
       "required": true,
@@ -46,6 +50,14 @@
     },
     "image": {
       "type": "string",
+      "required": true
+    },
+    "available": {
+      "type": "boolean",
+      "required": true
+    },
+    "bestSeller": {
+      "type": "boolean",
       "required": true
     }
   },

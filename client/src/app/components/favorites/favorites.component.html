@@ -1,12 +1,13 @@
-<div class="title text-center">
-  <h1>Favoritos</h1>
+<div class="mrx mt-3">
+  <div class="title text-center">
+    <h1>Favoritos</h1>
 </div>
 <section mdbScrollSpyWindow="scrollspy5" id="section1" class="section container-fluid">
   <div class="row justify-content-center">
     <div class="col-lg-4 col-md-4 col-sm-6 mb-3" *ngFor="let product of products">
       <mdb-card cascade="true" wider="true" class="card-ecommerce">
         <div class="view zoom view-cascade overlay waves-light" mdbWavesEffect>
-          <mdb-card-img src="{{product.imagePath}}" alt="sample photo"></mdb-card-img>
+          <img class="img-card" src="{{product.imagePath}}" alt="sample photo">
           <a>
             <div class="mask rgba-white-slight"></div>
           </a>
@@ -41,4 +42,4 @@
     </div>
   </div>
 </section>
-
+</div>

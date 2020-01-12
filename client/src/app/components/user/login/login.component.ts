@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     this.btnOpen.nativeElement.click();
   }
 
-  validations() {
+  validations(): void {
     this.loginForm = new FormGroup({
       userName: new FormControl(null, [Validators.required, Validators.minLength(5)]),
       userPassword: new FormControl(null, [Validators.required, Validators.minLength(8)])
@@ -47,8 +47,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       let userName:string = this.loginForm.value.userName.toLowerCase();
       let userPassword:string = this.loginForm.value.userPassword.toLowerCase();
-      console.log(userName);
-      console.log(userPassword);
       return this.authService.loginUser(userName, userPassword).subscribe(data => {
         this.authService.setUser(data.user);
         const token = data.id;

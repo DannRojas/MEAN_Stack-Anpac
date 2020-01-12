@@ -16,7 +16,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class FavoritesComponent implements OnInit, OnDestroy {
 
-  constructor(private authService: AuthService, private favoriteService: FavoriteService, private productService: ProductService, private imageService: ImageService) { }
+  constructor(private favoriteService: FavoriteService, private imageService: ImageService) { }
 
   private unsubscribe$ = new Subject<void>();
 
@@ -29,12 +29,13 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   }
 
   getListFavorites() {
-    let user = this.authService.getCurrentUser()
-    this.favoriteService.getFavoritesOfClient(user.id).subscribe(favorites => {
+    this.favoriteService.getFavoritesOfClient().subscribe(favorites => {
       this.prod = favorites;
-      this.imageService.getAllImages(this.prod).pipe(takeUntil(this.unsubscribe$)).subscribe(products => {
-        this.products = products;
-      })
+      if(this.prod.length > 0){
+        this.imageService.getAllImages(this.prod).pipe(takeUntil(this.unsubscribe$)).subscribe(products => {
+          this.products = products;
+        })
+      }
     })
   }
 

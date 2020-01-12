@@ -5,8 +5,8 @@
 
     <mdb-navbar-brand>
       <li>
-        <div class="logo-wrapper waves-light">
-          <a href="#"><img src="https://mdbootstrap.com/img/logo/mdb-transparent.png" class="img-fluid flex-center"></a>
+        <div class=" waves-light">
+          <a routerLink="/" class="logo-sidebar"><img src="../../../assets/img/anpac.jpg" class="w-100"></a>
         </div>
       </li>
     </mdb-navbar-brand>
@@ -38,7 +38,7 @@
       <li>
         <ul class="collapsible collapsible-accordion">
           <mdb-accordion [multiple]="false" aria-multiselectable="false">
-            <mdb-accordion-item>
+            <!-- <mdb-accordion-item>
               <mdb-accordion-item-head mdbWavesEffect>
                 <mdb-icon fas icon="chevron-right"></mdb-icon> <b>Collapsible menu</b>
               </mdb-accordion-item-head>
@@ -48,31 +48,17 @@
                   <li><a href="#" mdbWavesEffect><b>Link 2</b></a></li>
                 </ul>
               </mdb-accordion-item-body>
-            </mdb-accordion-item>
+            </mdb-accordion-item> -->
             <mdb-accordion-item class="no-collase">
-              <mdb-accordion-item-head mdbWavesEffect>
-                <mdb-icon far icon="hand-pointer"></mdb-icon> Simple link
+              <mdb-accordion-item-head mdbWavesEffect routerLink="/admin/inventory" routerLinkActive="active" (click)="sidenav.toggle()"><mdb-icon far icon="clipboard"></mdb-icon><span class="font-weight-bold"> Inventarios</span>
               </mdb-accordion-item-head>
               <mdb-accordion-item-body></mdb-accordion-item-body>
             </mdb-accordion-item>
-            <mdb-accordion-item>
-              <mdb-accordion-item-head mdbWavesEffect>
-                <mdb-icon far icon="eye"></mdb-icon> Collapsible menu 2
-              </mdb-accordion-item-head>
-              <mdb-accordion-item-body>
-                <ul>
-                  <li><a href="#" mdbWavesEffect>Link 1</a></li>
-                  <li><a href="#" mdbWavesEffect>Link 2</a></li>
-                </ul>
-              </mdb-accordion-item-body>
-            </mdb-accordion-item>
             <mdb-accordion-item class="no-collase">
-              <mdb-accordion-item-head mdbWavesEffect>
-                <mdb-icon far icon="gem"></mdb-icon> Simple link 2
+              <mdb-accordion-item-head mdbWavesEffect routerLink="/car-shop" routerLinkActive="active" (click)="sidenav.toggle()"><mdb-icon far icon="clipboard"></mdb-icon><span class="font-weight-bold"> Clientes</span>
               </mdb-accordion-item-head>
               <mdb-accordion-item-body></mdb-accordion-item-body>
             </mdb-accordion-item>
-
           </mdb-accordion>
         </ul>
       </li>
@@ -85,20 +71,20 @@
   <mdb-navbar SideClass="navbar navbar-expand-lg scrolling-navbar navbar-light white ie-nav fixed-top"
     [containerInside]="true">
     <mdb-navbar-brand class="d-flex align-items-center">
-      <mdb-icon *ngIf="isLogin" (click)="sidenav.show()" fas icon="bars" class="blue-text mr-2" size="lg"></mdb-icon>
-      <a class="navbar-brand font-weight-bold" [routerLink]="['/']">
-        <strong><b>ANPAC</b></strong>
+      <mdb-icon *ngIf="isAdmin" (click)="sidenav.show()" fas icon="bars" class="blue-text mr-2" size="lg"></mdb-icon>
+      <a class="navbar-brand" routerLink="/">
+        <img src="../../../assets/img/anpac.jpg" height="30" class="logo">
       </a>
     </mdb-navbar-brand>
     <links>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item waves-light" routerLinkActive="active">
+        <li class="nav-item waves-light" routerLinkActive="active" *ngIf="isLogin">
           <a class="nav-link" mdbWavesEffect routerLink="/favorites">
             <mdb-icon class="blue-text" fas icon="heart" size="lg"></mdb-icon> <span
               class="font-weight-bold">Favoritos</span>
           </a>
         </li>
-        <li class="nav-item waves-light" routerLinkActive="active">
+        <li class="nav-item waves-light" routerLinkActive="active" *ngIf="isLogin">
           <a class="nav-link" mdbWavesEffect routerLink="/car-shop">
             <mdb-icon class="blue-text" fas icon="shopping-cart" size="lg"></mdb-icon> <span
               class="font-weight-bold">Carrito</span>
@@ -112,20 +98,19 @@
         </li>
         <li class="nav-item waves-light" routerLinkActive="active">
           <a class="nav-link" mdbWavesEffect [routerLink]="['about']">
-            <mdb-icon class="blue-text" far icon="inbox" size="lg"></mdb-icon> <span class="font-weight-bold">Quienes
-              Somos</span>
+            <mdb-icon class="blue-text" far icon="inbox" size="lg"></mdb-icon> <span class="font-weight-bold">Quienes Somos</span>
           </a>
         </li>
         <li class="nav-item waves-light" routerLinkActive="active" *ngIf="!isLogin">
           <a class="nav-link" mdbWavesEffect (click)="onLogin()">
-            <mdb-icon class="blue-text" fas icon="user" size="lg"></mdb-icon> <span class="font-weight-bold">Iniciar
-              Sesión</span>
+            <mdb-icon class="blue-text" fas icon="user" size="lg"></mdb-icon> <span class="font-weight-bold">Iniciar Sesión</span>
           </a>
         </li>
         <li class="nav-item dropdown btn-group waves-light" dropdown routerLinkActive="active" *ngIf="isLogin">
-          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect><img
-              src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt=""
-              class="img-fluid rounded-circle z-depth-0"> <span class="font-weight-bold"> Nombre de Usuario</span></a>
+          <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            <mdb-icon class="blue-text" fas icon="user" size="lg"></mdb-icon> <span
+              class="font-weight-bold">{{user.username}}</span>
+          </a>
           <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
             <a class="dropdown-item waves-light" routerLink="/user/profile" mdbWavesEffect>Perfil</a>
             <div class="divider dropdown-divider"></div>

@@ -22,12 +22,13 @@ export class FavoriteService {
   getAllFavorites(): Observable<FavoriteInterface[]>{
     const token = this.authService.getToken();
     const url_api = `http://localhost:3000/api/favorites?access_token=${token}`;
-    return this.http.get<FavoriteInterface[]>(url_api,{ headers: this.headers });
+    return this.http.get<FavoriteInterface[]>(url_api, { headers: this.headers });
   }
 
-  getFavoritesOfClient(id: string): Observable<FavoriteInterface[]>{
+  getFavoritesOfClient(): Observable<FavoriteInterface[]>{
     const token = this.authService.getToken();
-    const url_api = `http://localhost:3000/api/favorites?filter=[where][clientId]=${id}access_token=${token}`;
+    const id = this.authService.getCurrentUser().id;
+    const url_api = `http://localhost:3000/api/favorites?filter[where][clientId]=${id}&access_token=${token}`;
     return this.http.get<FavoriteInterface[]>(url_api, { headers: this.headers });
   }
 

@@ -11,4 +11,9 @@ export interface ProductInterface{
     limitDate?: string;
     image?: string;
     imagePath?: string;
+    available?: boolean;
+    boxCapacity?: number;
+    boxes?: any;
+    singleUnits?: number;
+    bestSeller?: boolean;
 }

@@ -1,29 +1,25 @@
-.mrx{
-    // margin-left: 8%;
-    // margin-right: 8%;
-    
-    
+.mrx {
     // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {
-    margin-left: 2%;
-    margin-right: 2%;
-}
+    @media (min-width: 576px) {
+        margin-left : 2%;
+        margin-right: 2%;
+    }
 
-// Medium devices (tablets, 768px and up)
-@media (min-width: 768px) { 
-    margin-left: 5%;
-    margin-right: 5%;
-}
+    // Medium devices (tablets, 768px and up)
+    @media (min-width: 768px) {
+        margin-left : 5%;
+        margin-right: 5%;
+    }
 
-// Large devices (desktops, 992px and up)
-@media (min-width: 992px) { 
-    margin-left: 7%;
-    margin-right: 7%;
-}
+    // Large devices (desktops, 992px and up)
+    @media (min-width: 992px) {
+        margin-left : 7%;
+        margin-right: 7%;
+    }
 
-// Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) { 
-    margin-left: 7%;
-    margin-right: 7%;
-}
+    // Extra large devices (large desktops, 1200px and up)
+    @media (min-width: 1200px) {
+        margin-left : 7%;
+        margin-right: 7%;
+    }
 }
