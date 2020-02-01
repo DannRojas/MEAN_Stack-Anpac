@@ -1,30 +1,60 @@
 <section class="section mt-5 pb-5 mrx">
 
-  <mdb-card cascade="true" narrower="true">
+  <div class="card">
+    <div class="card-body py-1">
+      <div class="row">
+
+        <div class="col-lg-3 col-md-6">
+          <div class="md-form">
+            <mdb-select [(ngModel)]="filCat" name="filCategory" #filCategory="ngModel"
+              [ngModelOptions]="{standalone: true}" [options]="filterCat"
+              placeholder="{{filCat}}" label="Filtrar por tipo" (ngModelChange)="filterForCat($event)">
+            </mdb-select>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="md-form">
+            <mdb-select [(ngModel)]="filBestS" name="filBestS" #filBastS="ngModel"
+              [ngModelOptions]="{standalone: true}" [options]="filterBestS"
+              placeholder="{{filBestS}}" label="Filtrar por Más Vendido" (ngModelChange)="filterForBestS($event)">
+            </mdb-select>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="md-form">
+            <mdb-select [(ngModel)]="filAvai" name="filAvailable" #filAvailable="ngModel"
+              [ngModelOptions]="{standalone: true}" [options]="filterAvai"
+              placeholder="{{filAvai}}" label="Filtrar por Disponibilidad" (ngModelChange)="filterForAvai($event)">
+            </mdb-select>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="form-inline md-form form-sm active-pink-2">
+            <input mdbInput name="searchProd" type="search" class="form-control form-control-sm mr-3 w-75" [(ngModel)]="searchProd" placeholder="Nombre o código">
+            <label for="search">Buscador</label>
+            <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <mdb-card cascade="true" narrower="true" class="mt-5">
     <!--Card image-->
-    <div
-      class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+    <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
 
       <div>
-        <button mdbBtn color="white" outline="true" rounded="true" size="sm" type="button" class="px-2" mdbWavesEffect>
-          <mdb-icon fas icon="th-large" class="mt-0"></mdb-icon>
-        </button>
-        <button mdbBtn color="white" outline="true" rounded="true" size="sm" type="button" class="px-2" mdbWavesEffect>
-          <mdb-icon fas icon="columns" class="mt-0"></mdb-icon>
+        <button mdbBtn color="white" outline="true" rounded="true" size="sm" type="button" class="px-2" mdbWavesEffect title="Descargar en PDF">
+          <mdb-icon fas icon="file" class="mt-0" size="2x"></mdb-icon>
         </button>
       </div>
 
-      <a href="" class="white-text mx-3">Inventario de Productos Anpac</a>
+      <a class="white-text mx-3"><strong class="font-weight-bold h5">Inventario de Productos Anpac</strong></a>
 
       <div>
-        <button type="button" mdbBtn color="white" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
-          <mdb-icon fas icon="pencil-alt" class="mt-0"></mdb-icon>
-        </button>
-        <button type="button" mdbBtn color="white" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
-          <mdb-icon fas icon="times" class="mt-0"></mdb-icon>
-        </button>
-        <button type="button" mdbBtn color="white" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect>
-          <mdb-icon fas fas icon="info-circle-circle" class="mt-0"></mdb-icon>
+        <button type="button" mdbBtn color="white" outline="true" rounded="true" size="sm" class="px-2" mdbWavesEffect title="Agregar Producto" (click)="addModal()">
+          <mdb-icon fas icon="plus-circle" class="mt-0" size="2x"></mdb-icon>
         </button>
       </div>
 
@@ -32,34 +62,32 @@
     <!--/Card image-->
 
     <div class="px-4">
-
+      
       <div class="table-responsive">
         <!--Table-->
-        <table class="table product-table" mdbTable>
+        <table class="table product-table" mdbTable mdbTableScroll scrollY="true" maxHeight="700">
 
           <!--Table head-->
           <thead>
             <tr>
               <th></th>
               <th>
-                <a (click)="sortBy('name')"><strong> Producto</strong>
-                  <mdb-icon fas icon="sort" class="ml-1"></mdb-icon>
-                </a>
+                <strong>Producto</strong>
               </th>
               <th>
                 <strong>Tipo</strong>
               </th>
               <th>
-                <strong>Precio Unitario</strong>
+                <strong>Precio</strong>
               </th>
               <th>
                 <strong>Cajas</strong>
               </th>
               <th>
-                <strong>Unidades sueltas</strong>
+                <strong>Unidades</strong>
               </th>
               <th>
-                <strong>Total Unidades</strong>
+                <strong>Total</strong>
               </th>
               <th>
                 <strong>Opciones</strong>
@@ -70,7 +98,7 @@
 
           <!--Table body-->
           <tbody>
-            <tr *ngFor="let product of products;let i = index">
+            <tr *ngFor="let product of products | filterProduct: searchProd">
               <td scope="row"><img src="{{product.imagePath}}" class="img-small img-fluid z-depth-0 d-flex mx-auto">
               </td>
               <td><a>
@@ -78,7 +106,7 @@
                 </a>
                 <p class="text-muted">{{product.code}}</p>
               </td>
-              <td><strong>{{product.category}}</strong>
+              <td><p><strong>{{product.category}}</strong></p>
                 <p *ngIf="product.bestSeller">
                   <mdb-badge warning="true">Más vendidos</mdb-badge>
                 </p>
@@ -86,17 +114,16 @@
                   <mdb-badge danger="true">Nó disponible</mdb-badge>
                 </p>
               </td>
-              <td>{{product.price}}</td>
+              <td>{{product.price}} Bs. (Bolivianos)</td>
               <td>
                 <p>Unidades por caja: {{product.boxCapacity}}</p><strong>Cajas: {{product.boxes}}</strong>
               </td>
               <td>{{product.singleUnits}}</td>
-              <td>{{product.units}}</td>
+              <td>{{product.units}} Unidades</td>
               <td>
                 <mdb-icon fas icon="pencil" class="mr-2 green-text" size="lg" mdbTooltip="Modificar Producto"
-                  placement="top" (click)="onPreUpdate(product)"></mdb-icon>
-                <mdb-icon fas icon="trash" class="red-text" size="lg" title="Eliminar" mdbTooltip="Eliminar Producto"
-                  placement="top" (click)="onPreDelete(product)"></mdb-icon>
+                  placement="top" (click)="updateModal(product)"></mdb-icon>
+                <mdb-icon fas icon="trash" class="red-text" size="lg" mdbTooltip="Eliminar Producto" placement="top" (click)="onPreDelete(product)"></mdb-icon>
             </tr>
           </tbody>
           <!--Table body-->
@@ -109,236 +136,6 @@
 </section>
 <!-- </main> -->
 
-<button #btnDelete (click)="confirmDelete.show()" hidden>abrir</button>
+<app-confirm-delete (confirmDel)="onConfirmDelete($event)"></app-confirm-delete>
 
-<!-- Modal Confirm Delete -->
-<div mdbModal #confirmDelete="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
-  aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
-    <!--Content-->
-    <div class="modal-content text-center">
-      <!--Header-->
-      <div class="modal-header d-flex justify-content-center">
-        <p class="heading">¿Está seguro de que desea eliminar el producto: <strong
-            class="font-weight-bold">{{selectedProduct?.name}}</strong>?</p>
-      </div>
-      <!--Body-->
-      <div class="modal-body">
-        <mdb-icon fas icon="times" size="4x" class="animated rotateIn"></mdb-icon>
-      </div>
-      <!--Footer-->
-      <div class="modal-footer justify-content-center">
-        <a mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect
-          (click)="confirmDelete.hide()">No</a>
-        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal">Sí</a>
-      </div>
-    </div>
-    <!--/.Content-->
-  </div>
-</div>
-<!-- /Modal Confirm Delete -->
-
-<!-- Modal add or update product -->
-<button #btnFormProduct (click)="formProduct.show()" hidden data-toggle="modal"
-  data-target="#basicExample">abrir</button>
-<!-- Modal add and update product -->
-<div style="overflow-y: auto" mdbModal #formProduct="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1"
-  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-lg modal-info" role="document">
-    <!--Content-->
-    <div class="modal-content text-center">
-      <!--Header-->
-      <div class="modal-header d-flex justify-content-center">
-        <p class="heading">{{this.isUpdate ? 'Modificar Producto': 'Agregar Producto'}}</p>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="formProduct.hide()">
-          <span aria-hidden="true" class="white-text">×</span>
-        </button>
-      </div>
-
-      <!--Body-->
-      <div class="modal-body">
-
-        <form #productForm="ngForm" (ngSubmit)="onAddOrUpdate()" class="row">
-
-          <!-- image -->
-          <div class="view overlay col-lg-5 col-md-5 col-sm-12 zoom">
-            <input type="file" (change)="onFileSelected($event)" accept='image/*' class="d-none" #fileInput>
-            <img [src]="selectedProduct?.imagePath" class="img-fluid img-form" alt="sample image">
-            <div class="mask rgba-black-strong">
-              <div class="msk flex-center d-flex flex-column">
-                <a class="white-text pt-3" (click)="fileInput.click()">Pulse para agregar o cambiar la imagen</a>
-                <a mdbBtn floating="true" color="primary" class="waves-effect white-text" (click)="fileInput.click()"
-                  mdbWavesEffect size="sm">
-                  <mdb-icon fas icon="cloud-upload" class="white-text" size="lg" title="Subir imagen" placement="top">
-                  </mdb-icon>
-                </a>
-              </div>
-            </div>
-          </div>
-          <!-- /image -->
-
-          <div class="row col-lg-7 col-md-7 col-sm-12 pr-0">
-            <div class="col-lg-4 col-md-12 col-sm-12">
-              <div class="md-form">
-                <input mdbInput mdbValidate name="code" type="text" class="form-control"
-                  [(ngModel)]="selectedProduct.code" #code="ngModel" required>
-                <label for="code">Código Producto</label>
-                <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Código requerido</mdb-error>
-                <!-- <mdb-success *ngIf="code.valid">Código válido</mdb-success> -->
-              </div>
-            </div>
-            <div class="col-lg-8 col-md-12 col-sm-12">
-              <div class="md-form">
-                <mdb-select [(ngModel)]="selectedProduct.category" name="category" #category="ngModel"
-                  [ngModelOptions]="{standalone: true}" [options]="categories"
-                  placeholder="{{selectedProduct.category}}" label="Tipo">
-                </mdb-select>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="md-form">
-                <input mdbInput mdbValidate name="name" type="text" class="form-control"
-                  [(ngModel)]="selectedProduct.name" #name="ngModel" required>
-                <label for="code">Nombre del Producto</label>
-                <mdb-error *ngIf="name.invalid && (name.dirty || name.touched)">Nombre requerido</mdb-error>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="md-form">
-                <textarea mdbInput [(ngModel)]="selectedProduct.applications" #applications="ngModel"
-                  name="applications" type="text" class="md-textarea md-textarea-auto form-control" required></textarea>
-                <label for="applications">Aplicaciones del Producto</label>
-                <mdb-error *ngIf="applications.invalid && (applications.dirty || applications.touched)">Aplicacion
-                  requerida</mdb-error>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="md-form">
-              <textarea mdbInput [(ngModel)]="selectedProduct.description" #description="ngModel" name="description"
-                type="text" class="md-textarea md-textarea-auto form-control" required rows="3"></textarea>
-              <label for="description">Descripción del Producto</label>
-              <mdb-error *ngIf="description.invalid && (description.dirty || description.touched)">Descripción requerida
-              </mdb-error>
-            </div>
-          </div>
-
-          <div class="row w-100 mx-1">
-            <div class="col-4">
-              <mdb-badge class="d-block" pill="true" [primary]="selectedProduct.available? true: false"
-                [danger]="selectedProduct.available? false: true">¿Disponible?</mdb-badge>
-              <div class="form-check form-check-inline col-6">
-                <input type="radio" class="form-check-input" id="materialInline3" name="inlineMaterialRadiosExample1"
-                  mdbInput [(ngModel)]="selectedProduct.available" [value]="true">
-                <label class="form-check-label" for="materialInline3">Sí</label>
-              </div>
-              <div class="form-check form-check-inline col-6">
-                <input type="radio" class="form-check-input" id="materialInline4" name="inlineMaterialRadiosExample1"
-                  mdbInput [(ngModel)]="selectedProduct.available" [value]="false">
-                <label class="form-check-label" for="materialInline4">Nó</label>
-              </div>
-            </div>
-            <div class="col-4">
-              <mdb-badge class="d-block" pill="true" [warning]="selectedProduct.bestSeller? true: false"
-                [primary]="selectedProduct.bestSeller? false: true">¿Mejor Vendido?</mdb-badge>
-              <div class="form-check form-check-inline col-6">
-                <input type="radio" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample"
-                  mdbInput [(ngModel)]="selectedProduct.bestSeller" [value]="true">
-                <label class="form-check-label" for="materialInline1">Sí</label>
-              </div>
-              <div class="form-check form-check-inline col-6">
-                <input type="radio" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample"
-                  mdbInput [(ngModel)]="selectedProduct.bestSeller" [value]="false">
-                <label class="form-check-label" for="materialInline2">Nó</label>
-              </div>
-            </div>
-            <div class="col-4">
-              <p class="mb-0">Fecha Límite</p>
-              <div class="md-form mt-0">
-                <input mdbValidate [(ngModel)]="fecha" (ngModelChange)="changesOnDate($event)" type="date"  id="date" name="limitDate" class="form-control" #limitDate="ngModel" mdbInput required>
-                <mdb-error *ngIf="limitDate.invalid && (limitDate.dirty || limitDate.touched)">Es requerido
-                </mdb-error>
-              </div>
-              <!-- <mdb-date-picker [inline]="true" name="mydate" [options]="myDatePickerOptions" [placeholder]="'Seleccione una fecha'" [(ngModel)]="selectedDate" (ngModelChange)="changesOnDate($event)" required></mdb-date-picker> -->
-            </div>
-          </div>
-
-          <div class="row w-100 mx-1">
-            <div class="col-4">
-              <div class="md-form">
-                <input mdbInput mdbValidate name="size" type="text" class="form-control"
-                  [(ngModel)]="selectedProduct.size" #size="ngModel" required>
-                <label for="code">Tamaño del Producto</label>
-                <mdb-error *ngIf="size.invalid && (size.dirty || size.touched)">Tamaño requerido</mdb-error>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="md-form">
-                <input mdbInput mdbValidate name="price" type="number" class="form-control"
-                  [(ngModel)]="selectedProduct.price" #price="ngModel" required min="0">
-                <label for="code">Precio del Producto</label>
-                <mdb-error *ngIf="price.invalid && (price.dirty || price.touched)">Precio debe ser mayor a 0</mdb-error>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="md-form">
-                <input mdbInput mdbValidate name="boxCapacity" type="number" class="form-control"
-                  [(ngModel)]="selectedProduct.boxCapacity" (ngModelChange)="changesOnBCOrU($event)"
-                  #boxCapacity="ngModel" required min="1">
-                <label for="code">Unidades por caja</label>
-                <mdb-error *ngIf="boxCapacity.invalid && (boxCapacity.dirty || boxCapacity.touched)">Es requerido
-                </mdb-error>
-              </div>
-            </div>
-          </div>
-
-          <div class="row w-100 mx-1">
-            <div class="col-4">
-              <div class="md-form">
-                <input mdbInput mdbValidate name="boxes" type="number" class="form-control"
-                  [(ngModel)]="selectedProduct.boxes" (ngModelChange)="changesOnBOrSU($event)" #boxes="ngModel" required
-                  min="0">
-                <label for="code">Cajas</label>
-                <mdb-error *ngIf="boxes.invalid && (boxes.dirty || boxes.touched)">Es requerido
-                </mdb-error>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="md-form">
-                <input mdbInput mdbValidate name="singleUnits" type="number" class="form-control"
-                  [(ngModel)]="selectedProduct.singleUnits" (ngModelChange)="changesOnBOrSU($event)"
-                  #singleUnits="ngModel" required [max]="selectedProduct.boxCapacity - 1" min="0">
-                <label for="code">Unidades sueltas</label>
-                <mdb-error *ngIf="singleUnits.invalid && (singleUnits.dirty || singleUnits.touched)">Es requerido
-                </mdb-error>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="md-form">
-                <input mdbInput mdbValidate name="units" type="number" class="form-control"
-                  [(ngModel)]="selectedProduct.units" (ngModelChange)="changesOnBCOrU($event)" #units="ngModel"
-                  required>
-                <label for="code">Total Unidades</label>
-                <mdb-error *ngIf="units.invalid && (units.dirty || units.touched)">Es requerido
-                </mdb-error>
-              </div>
-            </div>
-          </div>
-
-        </form>
-
-      </div>
-
-      <!--Footer-->
-      <div class="modal-footer justify-content-center">
-        <a type="button" mdbBtn color="primary" outline="true" class="waves-light" mdbWavesEffect data-dismiss="modal"
-          (click)="formProduct.hide()">No</a>
-        <a mdbBtn color="primary" class="waves-light" mdbWavesEffect>Yes</a>
-      </div>
-    </div>
-    <!--/.Content-->
-  </div>
-</div>
-<!-- /Modal add or update product -->
+<app-form-product (reloadList)="getListProducts($event)"></app-form-product>

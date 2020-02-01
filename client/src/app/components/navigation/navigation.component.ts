@@ -23,15 +23,15 @@ export class NavigationComponent implements OnInit {
     this.getCurrentUser();
   }
 
-  onLogin(){
+  onLogin(): void{
     this.loginComponent.openModal();
   }
 
-  getCurrentUser(){
+  getCurrentUser(): void{
     if(this.authService.getCurrentUser() != null){
       this.user = this.authService.getCurrentUser();
       this.isLogin = true;
-      if(this.user.type == "admin"){
+      if(this.user.type === "admin" || this.user.type === "super admin"){
         this.isAdmin = true;
       }
     }

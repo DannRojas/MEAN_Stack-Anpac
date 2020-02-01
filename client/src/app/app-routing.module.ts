@@ -10,7 +10,6 @@ import { ProfileComponent } from './components/user/profile/profile.component';
 import { Page404Component } from './components/page404/page404.component';
 import { InventoryComponent } from './components/administration/inventory/inventory.component';
 
-
 const routes: Routes = [
     {path: '', component:HomeComponent},
     {path: 'product/:id', component:ProductComponent},

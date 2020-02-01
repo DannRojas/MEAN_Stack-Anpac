@@ -1,0 +1,56 @@
+<div [hidden]="!visible" class="mrx">
+  <div class="divider-new mt-4 mb-2">
+    <h3 class="h3-responsive font-weight-bold blue-text mx-3">Productos más vendidos</h3>
+  </div>
+    <owl-carousel-o [options]="customOptions" class="section container">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 responsive" *ngFor="let product of products">
+          <ng-template carouselSlide>
+            <mdb-card class="card wow fadeIn mx my-2" data-wow-delay="0.4s">
+              <div class="view overlay zoom">
+                <img src="{{product.imagePath}}" class="img-fluid img-card" alt="sample image">
+                <div class="mask flex-center">
+                  <a mdbBtn size="sm" rounded="true" mdbWavesEffect class="hov white-text"
+                  [routerLink]="'/product/'+product.id">Ver detalles</a>
+                </div>
+              </div>
+              <div class="card-body text-center pt-0">
+                <span class="grey-text d-block">
+                  <small class="mx-1">{{product.category}}</small>
+                  <small class="mx-1">#{{product.code}}</small>
+                </span>
+                <mdb-badge pill="true" warning="true" *ngIf="product.bestSeller">Más vendido</mdb-badge>
+                <mdb-card-title>
+                  <p class="card-title text-info" mdbTooltip="Ver detalles">
+                    <strong>
+                      <a [routerLink]="'/product/'+product.id">{{product.name}}</a>
+                    </strong>
+                  </p>
+                </mdb-card-title>
+
+                <div class="row mx-auto">
+                  <span class="mr-auto">
+                    <strong>{{product.price}}Bs.</strong>
+                  </span>
+                  <div class="ml-auto">
+                    <a class="" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
+                      <mdb-icon fas icon="heart" class="grey-text pr-1"></mdb-icon>
+                    </a>
+                    <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                      <mdb-icon fas icon="shopping-cart" class="grey-text"></mdb-icon>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </mdb-card>
+          </ng-template>
+        </div>
+      </div>
+      <!-- <div class="owl-nav">
+    <div class="owl-prev">prev</div>
+    <div class="owl-next">next</div>
+  </div> -->
+    </owl-carousel-o>
+    <div>Some tags after</div>
+  <!-- </section> -->
+</div>

@@ -39,7 +39,7 @@ body{
 
 img .img-small {
     position     : relative;
-    max-height   : 12rem;
+    max-height   : 12rem !important;
     width        : auto;
     margin-left  : auto;
     margin-right : auto;
@@ -49,7 +49,7 @@ img .img-small {
 
 .img-card {
     position     : relative;
-    height       : 12rem;
+    height       : 12rem !important;
     width        : auto !important;
     margin-left  : auto;
     margin-right : auto;

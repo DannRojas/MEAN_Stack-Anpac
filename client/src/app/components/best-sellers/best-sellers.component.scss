@@ -1,0 +1,53 @@
+.hov{
+  font-size: 13px;
+  font-weight: bold;
+  background-color: rgba(63, 81, 181, 0.7);
+  color: white;
+}
+
+.mx{
+  margin-left: 4%;
+  margin-right: 8%;
+}
+
+@media screen and (max-width: 800px) {
+  .responsive{
+    width: 50%;
+  }
+  .mx{
+    margin-left: 6%;
+    margin-right: 6%;
+  }
+}
+
+// .owl-carousel {
+//   width: 90% !important;
+//   margin: 10% auto;
+// }
+
+// .owl-nav {
+//   overflow: hidden;
+//   height: 0px;
+// }
+
+// .nav-btn {
+//   height: 47px;
+//   position: absolute;
+//   width: 26px;
+//   cursor: pointer;
+//   top: 30% !important;
+// }
+
+// .owl-carousel .owl-prev.disabled,
+// .owl-carousel .owl-next.disabled {
+//   pointer-events: none;
+//   opacity: 0.2;
+// }
+
+// .prev-slide:hover {
+//   background-position: 0px -53px;
+// }
+ 
+// .next-slide:hover {
+//   background-position: -24px -53px;
+// }

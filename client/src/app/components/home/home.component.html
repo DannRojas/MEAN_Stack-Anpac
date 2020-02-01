@@ -1,5 +1,5 @@
 <!-- Carousel Wrapper -->
-<mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [animation]="'fade'">
+<!-- <mdb-carousel [isControls]="true" class="carousel slide carousel-fade" [animation]="'fade'">
   <mdb-carousel-item>
     <div class="view w-100">
       <img class="d-block w-100" src="../../../assets/img/portada2.jpg" height="300" alt="First slide">
@@ -43,27 +43,49 @@
       <h3 class="font-weight-bold text-primary text-border-gray"><strong>Algunos de nuestros clientes</strong></h3>
     </div>
   </mdb-carousel-item>
-</mdb-carousel>
+</mdb-carousel> -->
 <!-- <div class="container"> -->
+
+<div class="view intro jarallax mt-2"
+  style="background-image: url(../../../assets/img/gris2.jpg); background-attachment: fixed; height: 680px;">
+  <div class="full-bg-img mask rgba-white-light">
+    <div class="container">
+      <div class="d-flex align-items-center d-flex justify-content-center" style="height: 600px">
+        <div class="row mt-5">
+          <div class="col-md-12 wow fadeIn mb-3">
+            <div class="intro-info-content text-center">
+              <img src="../../../assets/img/anpac.jpg" height="300"
+                class="display-1 mb-2 wow fadeInDown img-fluid mx-auto" data-wow-delay="0.3s">
+              <h3 class="font-up mb-4 mt-3 font-weight-bold wow fadeIn" data-wow-delay="0.4s">Representantes exclusivos
+                para toda Bolivia de:</h3>
+              <img src="../../../assets/png/aervoe-logo.png" class="img-fluid z-depth-0 logo wow fadeIn"
+                alt="Responsive image" data-wow-delay="0.4s">
+              <img src="../../../assets/png/crown-logo.png" class="img-fluid z-depth-0 logo wow fadeIn"
+                alt="Responsive image" data-wow-delay="0.4s">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!--Navbar-->
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="true">
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Navbar</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Nuestros productos</a></mdb-navbar-brand>
   <links>
     <!-- Links -->
     <ul mdbScrollSpy="scrollspy5" class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a mdbPageScroll mdbScrollSpyLink="section2" class="nav-link" href="#section2">Productos</a>
+      <li class="nav-item my-auto">
+        <a mdbPageScroll mdbScrollSpyLink="section2" class="nav-link" href="#section2">Los más vendidos</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item my-auto">
         <a class="nav-link waves-light" mdbWavesEffect>Lubricantes</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Limpiadores</a>
-      </li>
       <!-- Dropdown -->
-      <li class="nav-item dropdown" dropdown>
-        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>Otros<span class="caret"></span></a>
+      <!-- <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+          mdbWavesEffect>Otros<span class="caret"></span></a>
         <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">Anti-Agripamiento</a>
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">Metales/Metalistería</a>
@@ -71,7 +93,7 @@
           <div class="divider dropdown-divider"></div>
           <a class="dropdown-item waves-light" mdbWavesEffect href="#">Protectores y Pinturas</a>
         </div>
-      </li>
+      </li> -->
     </ul>
     <!-- Links -->
     <!-- Search form -->
@@ -82,149 +104,157 @@
     </form>
   </links>
   <!-- Collapsible content -->
-
 </mdb-navbar>
 <!--/.Navbar-->
 
-<div class="mrx mt-3">
-  <!-- <section class="section mb-4" id="section">
-    <div class="col-8">
-      <div class="view zoom text-center d-flex align-items-center">
-        <img class="cover" src="../../../assets/img/promocional.jpg">
-        <div class="mask rgba-white-strong">
-          <div class="dark-grey-text pt-3">
-            <div>
-              <a><span class="badge badge-danger">Bienvenido</span></a>
-              <h1 class="card-title font-weight-bold pt-2">
-                <strong>ANPAC</strong>
-              </h1>
-              <p class="font-weight-bold mx-1">Empresa importadora y distribuidora de aceites y aditivos industriales
-              </p>
-            </div>
+<div class="mrx mt-5">
+  <div class="container-fluid">
+
+    <div class="row">
+
+      <!-- Navigation product module -->
+      <div class="col-lg-4 col-md-4 mb-4">
+        <section class="section">
+          <ul class="list-group z-depth-1">
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <a class="dark-grey-text font-small" (click)="onToggle('Grasas')">
+                  <strong class="font-weight-bold">Grasas</strong></a>
+                <span class="badge badge-danger badge-pill">{{categories[0].quantity}}</span></div>
+              <div class="information" mdbCollapse [isCollapsed]="categories[0].value" #grasas="bs-collapse">
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                  anim
+                  keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <a class="dark-grey-text font-small" (click)="onToggle('Lubricantes')">
+                  <strong class="font-weight-bold">Lubricantes</strong></a>
+                <span class="badge badge-danger badge-pill">{{categories[1].quantity}}</span></div>
+              <div class="information" mdbCollapse #lubricantes="bs-collapse">
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                  anim
+                  keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <a class="dark-grey-text font-small" (click)="onToggle('SistemaInspección')">
+                  <strong class="font-weight-bold">Sistemas de Inspección</strong></a>
+                <span class="badge badge-danger badge-pill">{{categories[2].quantity}}</span></div>
+              <div class="information" mdbCollapse #sistInspeccion="bs-collapse">
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                  anim
+                  keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <a class="dark-grey-text font-small" (click)="onToggle('Metales/Metalistería')">
+                  <strong class="font-weight-bold">Metales/Metalistería</strong></a>
+                <span class="badge badge-danger badge-pill">{{categories[3].quantity}}</span></div>
+              <div class="information" mdbCollapse #metales="bs-collapse">
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                  anim
+                  keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <a class="dark-grey-text font-small" (click)="onToggle('Protectores')">
+                  <strong class="font-weight-bold">Protectores</strong></a>
+                <span class="badge badge-danger badge-pill">{{categories[4].quantity}}</span></div>
+              <div class="information" mdbCollapse #protectores="bs-collapse">
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                  anim
+                  keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <a class="dark-grey-text font-small" (click)="onToggle('Limpiadores')">
+                  <strong class="font-weight-bold">Limpiadores</strong></a>
+                <span class="badge badge-danger badge-pill">{{categories[5].quantity}}</span></div>
+              <div class="information" mdbCollapse #limpiadores="bs-collapse">
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                  anim
+                  keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <a class="dark-grey-text font-small" (click)="onToggle('Anti-Agripamiento/Deslizantes')">
+                  <strong class="font-weight-bold">Anti-Agripamientos/Deslizantes</strong></a>
+                <span class="badge badge-danger badge-pill">{{categories[6].quantity}}</span></div>
+              <div class="information" mdbCollapse #antiDeslizantes="bs-collapse">
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                  anim
+                  keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <a class="dark-grey-text font-small" (click)="onToggle('AgentesDesmoldeadores')">
+                  <strong class="font-weight-bold">Agentes Desmoldeadores</strong></a>
+                <span class="badge badge-danger badge-pill">{{categories[7].quantity}}</span></div>
+              <div class="information" mdbCollapse #desmoldeadores="bs-collapse">
+                <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil
+                  anim
+                  keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </div>
+      <!--/Navigation product module -->
+
+      <div class="col-lg-8 col-md-8">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4 responsive" *ngFor="let product of productCategory">
+            <mdb-card class="card wow fadeIn" data-wow-delay="0.4s">
+              <div class="view overlay zoom">
+                <img src="{{product.imagePath}}" class="img-fluid img-card" alt="sample image">
+                <div class="mask flex-center">
+                  <a mdbBtn size="sm" rounded="true" mdbWavesEffect class="hov white-text"
+                    (click)="navigateDetailsProduct(product.id)">
+                    Ver detalles
+                  </a>
+                </div>
+              </div>
+              <div class="card-body text-center pt-0">
+                <span class="grey-text d-block">
+                  <small class="mx-1">{{product.category}}</small>
+                  <small class="mx-1">#{{product.code}}</small>
+                </span>
+                <mdb-badge pill="true" warning="true" *ngIf="product.bestSeller">Más vendido</mdb-badge>
+                <mdb-card-title>
+                  <p class="card-title text-info" mdbTooltip="Ver detalles">
+                    <strong>
+                      <a (click)="navigateDetailsProduct(product.id)">{{product.name}}</a>
+                    </strong>
+                  </p>
+                </mdb-card-title>
+
+                <div class="row mx-auto">
+                  <span class="mr-auto">
+                    <strong>{{product.price}}Bs.</strong>
+                  </span>
+                  <div class="ml-auto">
+                    <a class="" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
+                      <mdb-icon fas icon="heart" class="grey-text pr-1"></mdb-icon>
+                    </a>
+                    <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                      <mdb-icon fas icon="shopping-cart" class="grey-text"></mdb-icon>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </mdb-card>
           </div>
         </div>
       </div>
+
     </div>
-  </section> -->
-  <!-- ********************************************************************************************* -->
-  <h2 class="text-center font-weight-bold mb-3"><b>Productos</b></h2>
-  <!-- ************************************************************************************* -->
-  <section mdbScrollSpyWindow="scrollspy5" id="section1" class="section container-fluid">
-    <div class="row justify-content-center">
-      <!--Grid column-->
-      <div class="col-lg-3 col-md-4 responsive mb-3" *ngFor="let product of products">
-        <!--Card-->
-        <mdb-card cascade="true" narrower="true" class="card-ecommerce animated fadeInUp">
-          <!--Card image-->
-          <div class="view zoom view-cascade overlay waves-light white" mdbWavesEffect>
-            <img src="{{product.imagePath}}" class="img-fluid img-card" alt="sample image">
-            <a>
-              <div class="mask rgba-white-slight"></div>
-            </a>
-          </div>
-          <!--Card image-->
-          <!--Card content-->
-          <mdb-card-body cascade="true" class="text-center no-padding">
-            <!--Category & Title-->
-            <a href="" class="text-muted">
-              <h5>{{product.code}}</h5>
-            </a>
-            <mdb-card-title>
-              <h5 class="card-title">
-                <strong>
-                  <a href="">{{product.name}}</a>
-                </strong>
-              </h5>
-            </mdb-card-title>
-
-            <span class="float-left font-weight-bold">
-              <strong>{{product.price}}$</strong>
-            </span>
-            <span class="float-right">
-              <a class="" data-toggle="tooltip" data-placement="top" title="Quick Look">
-                <mdb-icon far icon="eye" class="grey-text ml-3"></mdb-icon>
-              </a>
-              <a class="" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
-                <mdb-icon fas icon="heart" class="grey-text ml-3"></mdb-icon>
-              </a>
-            </span>
-            <!-- </mdb-card-footer> -->
-          </mdb-card-body>
-          <!--Card content-->
-        </mdb-card>
-        <!--Card-->
-      </div>
-      <!--Grid column-->
-    </div>
-  </section>
-  <section mdbScrollSpyWindow="scrollspy5" id="section3" class="section stylish-color">
-
-  </section>
-  <section mdbScrollSpyWindow="scrollspy5" id="section4" class="section secondary-color">
-
-  </section>
-  <section mdbScrollSpyWindow="scrollspy5" id="section5" class="section deep-purple">
-
-  </section>
-  <section mdbScrollSpyWindow="scrollspy5" id="section6" class="section success-color">
-
-  </section>
-  <!-- Slides -->
-  <!-- <div class="col-md-2 d-none d-md-block">
-  <div class="mdb-scrollspy mt-5">
-    <ul mdbScrollSpy="scrollspy5" class="nav d-flex flex-column p-3">
-      <li class="nav-item py-1"><a mdbScrollSpyLink="section1" class="nav-link" href="#section1">Section 1</a></li>
-      <li class="nav-item py-1"><a mdbScrollSpyLink="section2" class="nav-link" href="#section2">Section 2</a></li>
-      <li class="nav-item py-1"><a mdbScrollSpyLink="section3" class="nav-link" href="#section3">Section 3</a></li>
-      <li class="nav-item py-1"><a mdbScrollSpyLink="section4" class="nav-link" href="#section4">Section 4</a></li>
-      <li class="nav-item py-1"><a mdbScrollSpyLink="section5" class="nav-link" href="#section5">Section 5</a></li>
-      <li class="nav-item py-1"><a mdbScrollSpyLink="section6" class="nav-link" href="#section6">Section 6</a></li>
-    </ul>
   </div>
-</div> -->
-<section mdbScrollSpyWindow="scrollspy5" id="section2" class="section">
-  <div>Some tags before</div>
-  <owl-carousel-o [options]="customOptions" class="section container-fluid">
-    <div class="row justify-content-center">
-      <div class="col-lg-3 col-md-4 mb-4 responsive" *ngFor="let product of products">
-        <ng-template carouselSlide>
-          <mdb-card class="card mr-3 ml-3 mt-2 mb-2 animated pulse">
-            <div class="view overlay zoom">
-              <img src="{{product.imagePath}}" class="img-fluid img-card" alt="sample image">
-            </div>
-            <div class="card-body text-center pt-1">
-              <span class="badge badge-warning mb-2">{{product.code}}</span>
-              <mdb-card-title>
-                <h5 class="card-title">
-                  <strong>
-                    <a href="">{{product.name}}</a>
-                  </strong>
-                </h5>
-              </mdb-card-title>
-
-              <div class="row mx-auto">
-              <span class="mr-auto">
-                <strong>{{product.price}}Bs.</strong>
-              </span>
-              <div class="ml-auto">
-                <a class="" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
-                  <mdb-icon fas icon="heart" class="grey-text pr-1"></mdb-icon>
-                </a>
-                <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                  <mdb-icon fas icon="shopping-cart" class="grey-text"></mdb-icon>
-                </a>
-              </div>
-              </div>
-            </div>
-          </mdb-card>
-        </ng-template>
-      </div>
-    </div>
-    <!-- <div class="owl-nav">
-    <div class="owl-prev">prev</div>
-    <div class="owl-next">next</div>
-  </div> -->
-  </owl-carousel-o>
-  <div>Some tags after</div>
-</section>
 </div>

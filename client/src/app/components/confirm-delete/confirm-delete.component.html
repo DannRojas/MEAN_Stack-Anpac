@@ -1,0 +1,26 @@
+<!-- Modal Confirm Delete -->
+<div mdbModal #confirmDelete="mdbModal" class="modal fade top" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true" [config]="{ignoreBackdropClick: true}">
+  <div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading">{{message}} <strong
+            class="font-weight-bold">{{object}}</strong>?</p>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+        <mdb-icon fas icon="times" size="4x" class="animated rotateIn"></mdb-icon>
+      </div>
+      <!--Footer-->
+      <div class="modal-footer justify-content-center">
+        <a mdbBtn color="danger" outline="true" class="waves-effect" mdbWavesEffect
+          (click)="noConfirm()">No</a>
+        <a type="button" mdbBtn color="danger" class="waves-effect" mdbWavesEffect data-dismiss="modal" (click)="confirm()">Sí</a>
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!-- /Modal Confirm Delete -->

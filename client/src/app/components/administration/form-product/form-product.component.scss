@@ -1,7 +1,14 @@
 .img-form {
+    max-height: 400px;
     position     : relative;
     height       : 90%;
     width        : auto !important;
     margin: auto;
     margin-top: 8% !important;
 }
+
+@media screen and (max-width: 1000px) {
+    .sm-6{
+      width: 50%;
+    }
+  }

@@ -22,10 +22,10 @@ export class ImageService {
     Authorization: this.authService.getToken()
   });
 
-  saveImage(name: string, image: File) {
+  saveImage(file: File) {
     const token = this.authService.getToken();
     const formData = new FormData();
-    formData.append(name, image);
+    formData.append(file.name, file);
     const url_api = `http://localhost:3000/api/images/product-images/upload`;
     return (this.http.post(url_api, formData));
   }

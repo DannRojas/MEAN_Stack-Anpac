@@ -1,10 +1,18 @@
-strong{
-    color: black;
-    font-size: 20px;
-}
-
 .logo-sidebar{
     position: relative;
     height: auto;
     padding: 0;
+}
+
+.blu{
+    // color: #90a3cd;
+    font-size: 25px;
+}
+
+.active{
+    border-bottom: 5px solid rgb(33, 150, 243);
+}
+
+li.nav-item:hover{
+    border-bottom: 5px solid rgb(33, 150, 243);
 }

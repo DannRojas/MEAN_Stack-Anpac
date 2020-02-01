@@ -1,0 +1,205 @@
+<!-- Modal add and update product -->
+<div style="overflow-y: auto" mdbModal #formProduct="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" [config]="{ignoreBackdropClick: true}">
+  <div class="modal-dialog modal-notify modal-lg modal-info" role="document">
+    <!--Content-->
+    <div class="modal-content text-center">
+      <!--Header-->
+      <div class="modal-header d-flex justify-content-center">
+        <p class="heading font-weight-bold">{{isUpdate ? 'Modificar Producto' : 'Añadir Producto'}}</p>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeFormProduct()">
+          <span aria-hidden="true" class="white-text">×</span>
+        </button>
+      </div>
+
+      <!--Body-->
+      <div class="modal-body">
+
+        <form #productForm="ngForm" (ngSubmit)="onAddOrUpdate()" class="row">
+
+          <!-- image -->
+          <div class="view overlay col-lg-5 col-md-5 col-sm-12 zoom">
+            <input type="file" (change)="onFileSelected($event)" accept='image/*' class="d-none" #fileInput>
+            <img [src]="product?.imagePath" class="img-fluid img-form" alt="sample image">
+            <div class="mask rgba-black-strong">
+              <div class="msk flex-center d-flex flex-column">
+                <a class="white-text pt-3" (click)="fileInput.click()">Pulse para agregar o cambiar la imagen</a>
+                <a mdbBtn floating="true" color="primary" class="waves-effect white-text" (click)="fileInput.click()"
+                  mdbWavesEffect size="sm">
+                  <mdb-icon fas icon="cloud-upload" class="white-text" size="lg" title="Subir imagen" placement="top">
+                  </mdb-icon>
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- /image -->
+
+          <div class="row col-lg-7 col-md-7 col-sm-12 pr-0">
+            <div class="col-lg-4 col-sm-5">
+              <div class="md-form">
+                <input mdbInput mdbValidate name="code" type="text" class="form-control"
+                  [(ngModel)]="product.code" #code="ngModel" required>
+                <label for="code">Código</label>
+                <mdb-error *ngIf="code.invalid && (code.dirty || code.touched)">Código requerido</mdb-error>
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-7">
+              <div class="md-form">
+                <mdb-select [(ngModel)]="product.category" name="category" #category="ngModel"
+                  [ngModelOptions]="{standalone: true}" [options]="categories"
+                  placeholder="{{product.category}}" label="Tipo">
+                </mdb-select>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="md-form">
+                <input mdbInput mdbValidate name="name" type="text" class="form-control"
+                  [(ngModel)]="product.name" #name="ngModel" required>
+                <label for="name">Nombre del Producto</label>
+                <mdb-error *ngIf="name.invalid && (name.dirty || name.touched)">Nombre requerido</mdb-error>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="md-form">
+                <textarea mdbInput [(ngModel)]="product.applications" #applications="ngModel"
+                  name="applications" type="text" class="md-textarea md-textarea-auto form-control" required></textarea>
+                <label for="applications">Aplicaciones del Producto</label>
+                <mdb-error *ngIf="applications.invalid && (applications.dirty || applications.touched)">Aplicacion
+                  requerida</mdb-error>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="md-form">
+              <textarea mdbInput [(ngModel)]="product.description" #description="ngModel" name="description"
+                type="text" class="md-textarea md-textarea-auto form-control" required rows="3"></textarea>
+              <label for="description">Descripción del Producto</label>
+              <mdb-error *ngIf="description.invalid && (description.dirty || description.touched)">Descripción requerida
+              </mdb-error>
+            </div>
+          </div>
+
+          <div class="row w-100 mx-1">
+            <div class="col-lg-4 sm-6">
+              <div class="md-form">
+                <input mdbInput mdbValidate name="size" type="text" class="form-control"
+                  [(ngModel)]="product.size" #size="ngModel" required>
+                <label for="size">Peso</label>
+                <mdb-error *ngIf="size.invalid && (size.dirty || size.touched)">Peso es requerido</mdb-error>
+              </div>
+            </div>
+            <div class="col-lg-4 sm-6">
+              <div class="md-form">
+                <input mdbInput mdbValidate name="price" type="number" class="form-control"
+                  [(ngModel)]="product.price" #price="ngModel" required min="0">
+                <label for="price">Precio</label>
+                <mdb-error *ngIf="price.invalid && (price.dirty || price.touched)">Precio debe ser mayor a 0</mdb-error>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+              <div class="md-form">
+                <input mdbInput mdbValidate name="boxCapacity" type="number" class="form-control"
+                  [(ngModel)]="product.boxCapacity" (ngModelChange)="changesOnBCOrU($event)"
+                  #boxCapacity="ngModel" min="1" required>
+                <label for="boxCapacity">Unidades por caja</label>
+                <mdb-error *ngIf="boxCapacity.invalid && (boxCapacity.dirty || boxCapacity.touched)">Debe ser mayor a 0
+                </mdb-error>
+              </div>
+            </div>
+          </div>
+
+          <div class="row w-100 mx-1 mb-1">
+            <div class="col-lg-4 sm-6">
+              <div class="md-form">
+                <input mdbInput mdbValidate name="boxes" type="number" class="form-control"
+                  [(ngModel)]="product.boxes" (ngModelChange)="changesOnBOrSU($event)" #boxes="ngModel" min="0" required>
+                <label for="boxes">Cajas</label>
+                <mdb-error *ngIf="boxes.invalid && (boxes.dirty || boxes.touched)">Es requerido
+                </mdb-error>
+              </div>
+            </div>
+            <div class="col-lg-4 sm-6">
+              <div class="md-form">
+                <input mdbInput mdbValidate name="singleUnits" type="number" class="form-control"
+                  [(ngModel)]="product.singleUnits" (ngModelChange)="changesOnBOrSU($event)"
+                  #singleUnits="ngModel" [max]="product.boxCapacity - 1" min="0" required>
+                <label for="singleUnits">Unidades</label>
+                <mdb-error *ngIf="singleUnits.invalid && (singleUnits.dirty || singleUnits.touched)">debe ser 0 o mayor
+                </mdb-error>
+              </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+              <div class="md-form">
+                <input mdbInput mdbValidate name="units" type="number" class="form-control"
+                  [(ngModel)]="product.units" (ngModelChange)="changesOnBCOrU($event)" #units="ngModel"
+                  required min="0">
+                <label for="units">Total unidades</label>
+                <mdb-error *ngIf="units.invalid && (units.dirty || units.touched)">Debe ser 0 o mayór
+                </mdb-error>
+              </div>
+            </div>
+          </div>
+
+          <div class="row w-100 mx-1">
+            <div class="col-5 mx-auto">
+              <mdb-badge class="d-block" pill="true" [primary]="product.available? true: false"
+                [danger]="product.available? false: true">¿Disponible?</mdb-badge>
+              <div class="form-check form-check-inline col-6  mt-2">
+                <input type="radio" class="form-check-input" id="materialInline3" name="inlineMaterialRadiosExample1"
+                  mdbInput [(ngModel)]="product.available" [value]="true">
+                <label class="form-check-label" for="materialInline3">Sí</label>
+              </div>
+              <div class="form-check form-check-inline col-6  mt-2">
+                <input type="radio" class="form-check-input" id="materialInline4" name="inlineMaterialRadiosExample1"
+                  mdbInput [(ngModel)]="product.available" [value]="false">
+                <label class="form-check-label" for="materialInline4">Nó</label>
+              </div>
+            </div>
+
+            <div class="col-5 mx-auto">
+              <mdb-badge class="d-block" pill="true" [warning]="product.bestSeller? true: false"
+                [primary]="product.bestSeller? false: true">¿Más Vendido?</mdb-badge>
+              <div class="form-check form-check-inline col-6  mt-2">
+                <input type="radio" class="form-check-input" id="materialInline1" name="inlineMaterialRadiosExample"
+                  mdbInput [(ngModel)]="product.bestSeller" [value]="true">
+                <label class="form-check-label" for="materialInline1">Sí</label>
+              </div>
+              <div class="form-check form-check-inline col-6  mt-2">
+                <input type="radio" class="form-check-input" id="materialInline2" name="inlineMaterialRadiosExample"
+                  mdbInput [(ngModel)]="product.bestSeller" [value]="false">
+                <label class="form-check-label" for="materialInline2">Nó</label>
+              </div>
+            </div>
+          </div>
+
+        </form>
+
+        <div class="alert alert-danger mt-2" role="alert" *ngIf="errorForm === true">
+          Asegurese de aver subido una imagen y rellenado correctamente todos los campos
+        </div>
+      </div>
+
+      <!--Footer-->
+      <div class="d-flex modal-footer">
+        <div class="container">
+          <div class="row">
+            <p class="font-weight-bold mx-auto">¿Desea guardar los cámbios efectuados?</p>
+          </div>
+          <div class="row">
+            <div class="mx-auto">
+              <a type="button" mdbBtn color="primary" outline="true" class="waves-light" mdbWavesEffect
+                data-dismiss="modal" (click)="closeFormProduct()">No</a>
+              <button mdbBtn color="primary" class="waves-light" (click)="validator()" [disabled]="productForm.valid ? false : true" mdbWavesEffect>Sí</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!-- /Modal add or update product -->
+
+<!-- <app-inventory></app-inventory> -->

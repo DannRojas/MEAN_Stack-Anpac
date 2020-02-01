@@ -44,10 +44,6 @@
       "required": true,
       "default": 0
     },
-    "limitDate": {
-      "type": "string",
-      "required": true
-    },
     "image": {
       "type": "string",
       "required": true

@@ -1,13 +1,16 @@
-
+//Modules
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AgmCoreModule } from '@agm/core';
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MDBSpinningPreloader, MDBBootstrapModulesPro, ToastModule } from 'ng-uikit-pro-standard';
+
+//Components
+import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/user/profile/profile.component';
 import { LoginComponent } from './components/user/login/login.component';
@@ -18,10 +21,14 @@ import { AboutComponent } from './components/about/about.component';
 import { Page404Component } from './components/page404/page404.component';
 import { ProductComponent } from './components/product/product.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
 import { InventoryComponent } from './components/administration/inventory/inventory.component';
 import { ClientsComponent } from './components/administration/clients/clients.component';
+import { FormProductComponent } from './components/administration/form-product/form-product.component';
+import { ConfirmDeleteComponent } from './components/confirm-delete/confirm-delete.component';
 
+//Pipes
+import { FilterProductPipe } from './pipes/filter-product.pipe';
+import { BestSellersComponent } from './components/best-sellers/best-sellers.component';
 
 @NgModule({
   declarations: [
@@ -37,14 +44,18 @@ import { ClientsComponent } from './components/administration/clients/clients.co
     ProductComponent,
     NavigationComponent,
     InventoryComponent,
-    ClientsComponent
+    ClientsComponent,
+    FilterProductPipe,
+    FormProductComponent,
+    ConfirmDeleteComponent,
+    BestSellersComponent
   ],
   imports: [
     BrowserModule,
     CarouselModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpModule,
+    FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
     ToastModule.forRoot(),
