@@ -1,3 +1,6 @@
+import { CarProductInterface } from './../../models/carProduct-interface';
+import { ProductInterface } from './../../models/product-interface';
+import { CarService } from './../../services/car.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarComponent implements OnInit {
 
-  constructor() { }
+  public carProducts: CarProductInterface[];
+
+  constructor(private carService: CarService) { }
 
   ngOnInit() {
+
   }
 
 }

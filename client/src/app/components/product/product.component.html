@@ -1,4 +1,5 @@
-<div class="mrx mt-5">
+<!-- <a #init href="/product/#init"></a> -->
+<div id="#init" class="mrx mt-5">
   <div class="container-fluid">
     <div class="row">
 
@@ -12,7 +13,8 @@
               <!-- <div class="view overlay zoom mx-auto"> -->
               <div class="col-4 d-flex">
                 <div class="view overlay zoom mx-auto">
-                <a [routerLink]="'/product/'+product.id"><img src="{{product?.imagePath}}" class="img-fluid img-card-side"></a>
+                  <a [routerLink]="'/product/'+product.id"><img src="{{product?.imagePath}}"
+                      class="img-fluid img-card-side"></a>
                 </div>
               </div>
               <!-- </div> -->
@@ -20,20 +22,19 @@
               <div class="col-8 pr-4 pl-0">
                 <!-- Title -->
                 <p class="mb-0"><a [routerLink]="'/product/'+product.id"><strong>{{product?.name}}</strong></a></p>
-                <div>
-                <span class="grey-text">
-                  <small>cod: {{product?.code}}</small>
-                </span></div>
-                <mdb-badge pill="true" warning="true" *ngIf="product?.bestSeller">Más vendido</mdb-badge>
-
+                <div><span class="grey-text">
+                    <small>{{product?.category}} #{{product?.code}}</small>
+                  </span></div>
+                  <mdb-badge pill="true" warning="true" *ngIf="product?.bestSeller && product?.available">Más vendido</mdb-badge>
+                  <mdb-badge pill="true" danger="true" *ngIf="!product?.available">Próximamente</mdb-badge>
+                  
                 <div class="d-flex justify-content-between">
-                    <h6 class="h6-responsive font-weight-bold text-danger">
-                      <strong>{{product?.price}} Bs.</strong>
-                    </h6>
-                    <a class="mr-1" data-toggle="tooltip" data-placement="top"
-                      title="Agregar al carrito">
-                      <mdb-icon fas icon="shopping-cart" class="grey-text"></mdb-icon>
-                    </a>
+                  <h6 class="h6-responsive font-weight-bold text-danger">
+                    <strong>{{product?.price}} Bs.</strong>
+                  </h6>
+                  <a class="mr-1" data-toggle="tooltip" data-placement="top" title="Agregar al carrito">
+                    <mdb-icon fas icon="shopping-cart" class="grey-text"></mdb-icon>
+                  </a>
                 </div>
               </div>
             </div>
@@ -50,9 +51,14 @@
 
             <div class="row">
 
-              <div class="col-lg-6 col-md-5 col-sm-12 d-flex px-0">
-                <div class="view overlay zoom mx-auto my-auto">
-                <img src="{{product?.imagePath}}" class="img-detail" alt="sample image">
+              <div class="view col-lg-6 col-md-5 col-sm-12 d-flex px-0">
+                <div class="view zoom mx-auto my-auto">
+                  <img src="{{product?.imagePath}}" class="img-detail" alt="sample image">
+                </div>
+                <div *ngIf="!product?.available" class="mask flex-center rgba-black-light">
+                  <h3 class="red-text font-weight-bold">
+                    <mdb-badge pill="true" danger="true">Producto no disponible</mdb-badge>
+                  </h3>
                 </div>
               </div>
 
@@ -61,9 +67,10 @@
                   <strong>{{product?.name}}</strong>
                 </h3>
                 <div class="text-center">
-                <h6 class="grey-text">
-                  Código: {{product?.code}}
-                </h6></div>
+                  <h6 class="grey-text">
+                    Código: {{product?.code}}
+                  </h6>
+                </div>
                 <div class="text-center mb-3">
                   <mdb-badge pill="true" class="mx-2" warning="true" *ngIf="product?.bestSeller">Más vendido</mdb-badge>
                   <mdb-badge pill="true" class="mx-2" info="true">{{product?.category}}</mdb-badge>
@@ -76,19 +83,27 @@
                     <strong>{{product?.price}} Bs.</strong>
                   </h5>
                 </div>
-                <div class="container">
-                  <h5 class="text-info">
-                    <strong>Descripción:</strong>
-                  </h5>
-                  <mdb-card-text>
-                    {{product?.description}}
-                  </mdb-card-text>
-                  <h5 class="text-info">
-                    <strong>Aplicaciones:</strong>
-                  </h5>
-                  <mdb-card-text>
-                    {{product?.applications}}
-                  </mdb-card-text>
+                <div>
+                  <mdb-accordion [multiple]="false" aria-multiselectable="true">
+                    <mdb-accordion-item [collapsed]="false">
+                      <mdb-accordion-item-head>Descripción</mdb-accordion-item-head>
+                      <mdb-accordion-item-body>{{product?.description}}</mdb-accordion-item-body>
+                    </mdb-accordion-item>
+                    <mdb-accordion-item>
+                      <mdb-accordion-item-head>Aplicaciones</mdb-accordion-item-head>
+                      <mdb-accordion-item-body>{{product?.applications}}</mdb-accordion-item-body>
+                    </mdb-accordion-item>
+                  </mdb-accordion>
+                </div>
+                <div class="d-flex justify-content-center flex-column">
+                  <button *ngIf="product?.available" class="my-3 mx-auto" type="button" mdbBtn color="info" rounded="true" size="sm">Agregar al carrito<mdb-icon fas icon="shopping-cart" class="ml-1" aria-hidden="true"></mdb-icon></button>
+                  <div *ngIf="!product?.available" class="text-center mt-2">
+                    <div><mdb-badge pill="true" class="" warning="true">¡Importante!</mdb-badge></div>
+                    <div><span class="grey-text">
+                      <small>El producto no está disponible actualmente, puede enviar un mensaje a travéz de nuestro apartado de contacto para solicitar el producto</small>
+                    </span></div>
+                  </div>
+                  <button *ngIf="!product?.available" class="my-3 mx-auto" type="button" mdbBtn color="info" rounded="true" size="sm" routerLink="/contact">Ponerse en contacto<mdb-icon fas icon="envelope" class="ml-1" aria-hidden="true"></mdb-icon></button>
                 </div>
               </div>
 
@@ -96,7 +111,6 @@
 
           </mdb-card-body>
           <!--/.Card content-->
-
         </mdb-card>
         <!--/.Card-->
       </div>

@@ -1,26 +1,54 @@
+import { Observable } from 'rxjs/internal/Observable';
+import { AuthService } from './auth.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ProductInterface } from './../models/product-interface';
 import { CarProductInterface } from '../models/carProduct-interface';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CarService {
 
-  constructor() { }
+  constructor(private http: HttpClient, private authService: AuthService) { }
 
-  public carProducts: CarProductInterface[]
+  private carProducts: CarProductInterface[];
 
-  addProductToCar(product: ProductInterface):void{
-    this.carProducts.push(product);
+  headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: this.authService.getToken()
+  });
+
+  getCarProductsByClient(clientId: string): Observable<CarProductInterface[]>{
+    const token = this.authService.getToken();
+    const url_api = `http://localhost:3000/api/carProducts?filter=[clientId]=${clientId}&access_token=${token}`;
+    return this.http.get<CarProductInterface[]>(url_api, {headers: this.headers});
   }
 
-  addProductsToCar(products: any[]):void{
-    this.carProducts = this.carProducts.concat(products);
+  getCountCarProductsByClient(clientId: string): Observable<any>{
+    const token = this.authService.getToken();
+    const url_api = `http://localhost:3000/api/carProducts?where[clientId]=${clientId}&access_token=${token}`;
+    return this.http.get<any>(url_api, {headers: this.headers}).pipe(map(data => data));
   }
 
-  deleteProductFromCar(product: ProductInterface):void{
-    let indice = this.carProducts.findIndex(cp => cp.code === product.code);
-    this.carProducts.slice(indice, 1);
+  saveCarProduct(carProduct: CarProductInterface): Observable<CarProductInterface>{
+    const token = this.authService.getToken();
+    const url_api = `http://localhost:3000/api/carProducts?access_token=${token}`;
+    return this.http.post<CarProductInterface>(url_api, carProduct, {headers: this.headers});
   }
+
+  updateCarProduct(carProduct: CarProductInterface): Observable<CarProductInterface> {
+    //TODO: get token
+    const token = this.authService.getToken();
+    const url_api = `http://localhost:3000/api/carProducts/${carProduct.id}/?access_token=${token}`;
+    return this.http.put<CarProductInterface>(url_api, carProduct, { headers: this.headers }).pipe(map(data => data));
+  }
+
+  deleteProduct(id: string) {
+    //TODO: get token
+    const token = this.authService.getToken();
+    const url_api = `http://localhost:3000/api/carProducts/${id}?access_token=${token}`;
+    return this.http.delete(url_api, { headers: this.headers }).pipe(map(data => data));
+  }
+  
 }

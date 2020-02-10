@@ -59,5 +59,9 @@
   "favorite": {
     "dataSource": "db",
     "public": true
+  },
+  "carProduct": {
+    "dataSource": "db",
+    "public": true
   }
 }

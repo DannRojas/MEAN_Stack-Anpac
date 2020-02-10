@@ -28,13 +28,10 @@ export class BestSellersComponent implements OnInit, OnDestroy {
   isVisible(){
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // console.log(event.url);
-          if (event.url === "/" || event.url.match('/product/')) {
+          if (event.url === "/" || event.url ==="/car-shop" || event.url.match('/product/')) {
               this.visible = true;
-              // console.log("Vendadero");
           } else {
               this.visible = false;
-              // console.log("Falso");
           }
       }
   });

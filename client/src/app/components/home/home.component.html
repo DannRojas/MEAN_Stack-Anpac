@@ -212,14 +212,15 @@
       <div class="col-lg-8 col-md-8">
         <div class="row">
           <div class="col-lg-4 col-md-6 mb-4 responsive" *ngFor="let product of productCategory">
-            <mdb-card class="card wow fadeIn" data-wow-delay="0.4s">
+            <!-- <mdb-card class="card wow fadeIn" data-wow-delay="0.4s"> -->
+            <mdb-card class="card">
               <div class="view overlay zoom">
                 <img src="{{product.imagePath}}" class="img-fluid img-card" alt="sample image">
-                <div class="mask flex-center">
-                  <a mdbBtn size="sm" rounded="true" mdbWavesEffect class="hov white-text"
-                    (click)="navigateDetailsProduct(product.id)">
-                    Ver detalles
-                  </a>
+                <div class="mask flex-center" *ngIf="product.available">
+                  <a mdbBtn size="sm" rounded="true" mdbWavesEffect class="hov white-text" (click)="navigateDetailsProduct(product.id)">Ver detalles</a>
+                </div>
+                <div class="mask flex-center" *ngIf="!product.available">
+                  <a mdbBtn size="sm" rounded="true" mdbWavesEffect class="hov-danger white-text" (click)="navigateDetailsProduct(product.id)">Producto no disponible actualmente, ¿ver detalles?</a>
                 </div>
               </div>
               <div class="card-body text-center pt-0">
@@ -227,7 +228,8 @@
                   <small class="mx-1">{{product.category}}</small>
                   <small class="mx-1">#{{product.code}}</small>
                 </span>
-                <mdb-badge pill="true" warning="true" *ngIf="product.bestSeller">Más vendido</mdb-badge>
+                <mdb-badge pill="true" warning="true" *ngIf="product.bestSeller && product.available">Más vendido</mdb-badge>
+                <mdb-badge pill="true" danger="true" *ngIf="!product.available">Próximamente</mdb-badge>
                 <mdb-card-title>
                   <p class="card-title text-info" mdbTooltip="Ver detalles">
                     <strong>
@@ -241,11 +243,11 @@
                     <strong>{{product.price}}Bs.</strong>
                   </span>
                   <div class="ml-auto">
-                    <a class="" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
+                    <!-- <a class="" data-toggle="tooltip" data-placement="top" title="Agregar a favoritos">
                       <mdb-icon fas icon="heart" class="grey-text pr-1"></mdb-icon>
-                    </a>
-                    <a class="" data-toggle="tooltip" data-placement="top" title="Add to Cart">
-                      <mdb-icon fas icon="shopping-cart" class="grey-text"></mdb-icon>
+                    </a> -->
+                    <a (click)="onAddToCar(product?.id)" data-toggle="tooltip" data-placement="top" title="Add to Cart">
+                      <mdb-icon fas icon="shopping-cart" [class.text-info]="product.carProduct" [class.grey-text]="!product.carProduct"></mdb-icon>
                     </a>
                   </div>
                 </div>

@@ -15,6 +15,7 @@ export interface ProductInterface{
     boxes?: any;
     singleUnits?: number;
     bestSeller?: boolean;
+    carProduct?: boolean;
 }
 
 export interface ProductProdInterface{

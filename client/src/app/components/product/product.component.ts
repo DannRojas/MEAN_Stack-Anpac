@@ -2,7 +2,7 @@ import { isNullOrUndefined } from 'util';
 import { takeUntil } from 'rxjs/operators';
 import { ImageService } from './../../services/image.service';
 import { ProductService } from 'src/app/services/product.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ProductInterface } from 'src/app/models/product-interface';
 import { Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -21,10 +21,14 @@ export class ProductComponent implements OnInit, OnDestroy {
   public products: ProductInterface[];
   public relatedProducts: ProductInterface[];
 
+  // @ViewChild('init')
+  // init: ElementRef;
+
   ngOnInit() {
     this._activatedRoute.params.subscribe(route => {
       const idProduct = this._activatedRoute.snapshot.params['id'];
       this.getProduct(idProduct);
+      // this.init.nativeElement.click();
     })
   }
 
